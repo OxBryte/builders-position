@@ -59,7 +59,7 @@ export default function LeaderboardPage() {
   }, [data?.users, searchTerm]);
 
   return (
-    <section className="mt-8 space-y-10">
+    <section className=" space-y-10">
       <header className="space-y-2">
         <h1 className="text-3xl font-semibold text-gray-900">
           WalletConnect Builders
