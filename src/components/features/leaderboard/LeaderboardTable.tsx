@@ -94,6 +94,11 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                         />
                       </div>
                       <div className="flex flex-col gap-1">
+                        <p className="font-medium text-gray-900">
+                          {user.profile.display_name ??
+                            user.profile.name ??
+                            "Anon"}
+                        </p>
                         {user.profile.bio && (
                           <p
                             className="text-xs text-gray-500"
@@ -102,11 +107,6 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                             {truncateText(user.profile.bio, 40)}
                           </p>
                         )}
-                        <p className="font-medium text-gray-900">
-                          {user.profile.display_name ??
-                            user.profile.name ??
-                            "Anon"}
-                        </p>
                       </div>
                     </div>
                   </td>
