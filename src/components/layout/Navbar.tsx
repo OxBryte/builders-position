@@ -7,7 +7,7 @@ export default function Navbar() {
   const { address, isConnected } = useAppKitAccount();
 
   return (
-    <div className="px-8 bg-white border border-gray-200">
+    <div className="bg-white border border-gray-200">
       <nav className="flex items-center justify-between gap-6 py-4 mx-auto w-full max-w-[920px]">
         <span className="text-lg font-semibold tracking-wide">
           Builders Position
