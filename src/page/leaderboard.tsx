@@ -68,34 +68,29 @@ export default function LeaderboardPage() {
         </p>
       </header>
 
-      <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
-        <label className="block text-sm font-medium text-gray-600">
-          Search builders
-        </label>
-        <div className="mt-2 flex items-center gap-2">
-          <input
-            type="search"
-            value={searchTerm}
-            onChange={(event) => {
-              const value = event.target.value;
-              setSearchTerm(value);
-              if (value) {
-                setPage(1);
-              }
-            }}
-            placeholder="Search by name, bio, summary, or rank…"
-            className="w-full rounded-full border border-gray-300 bg-white px-4 py-2 text-sm shadow-sm outline-none transition focus:border-blue-400 focus:ring focus:ring-blue-100"
-          />
-          {searchTerm ? (
-            <button
-              type="button"
-              onClick={() => setSearchTerm("")}
-              className="rounded-full border border-gray-200 px-3 py-2 text-xs font-medium text-gray-500 transition hover:border-gray-300 hover:text-gray-700"
-            >
-              Clear
-            </button>
-          ) : null}
-        </div>
+      <div className="">
+        <input
+          type="search"
+          value={searchTerm}
+          onChange={(event) => {
+            const value = event.target.value;
+            setSearchTerm(value);
+            if (value) {
+              setPage(1);
+            }
+          }}
+          placeholder="Search by name, bio, summary, or rank…"
+          className="w-full rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm shadow-sm outline-none transition focus:border-blue-400 focus:ring focus:ring-blue-100"
+        />
+        {searchTerm ? (
+          <button
+            type="button"
+            onClick={() => setSearchTerm("")}
+            className="rounded-full border border-gray-200 px-3 py-2 text-xs font-medium text-gray-500 transition hover:border-gray-300 hover:text-gray-700"
+          >
+            Clear
+          </button>
+        ) : null}
         {searchTerm ? (
           <p className="mt-2 text-xs text-gray-500">
             Showing{" "}
