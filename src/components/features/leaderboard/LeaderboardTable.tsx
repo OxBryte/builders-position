@@ -94,34 +94,39 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                         alt={user.profile.display_name ?? "Builder"}
                         className="h-14 w-14 rounded-xl border border-gray-200 object-cover shadow-sm"
                       />
-                      {user.profile.bio && (
-                        <p className="text-xs text-gray-500 line-clamp-1" title={user.profile.bio}>
-                          {user.profile.bio}
-                        </p>
-                      )}
-                      <div>
-                        <p className="font-medium text-gray-900">
-                          {user.profile.display_name ??
-                            user.profile.name ??
-                            "Anon"}
-                        </p>
-                        <p className="text-xs text-gray-500">
-                          {change.label !== "—" ? (
-                            <span
-                              className={
-                                change.tone === "positive"
-                                  ? "text-emerald-600"
-                                  : change.tone === "negative"
-                                  ? "text-rose-600"
-                                  : "text-gray-500"
-                              }
-                            >
-                              {change.label}
-                            </span>
-                          ) : (
-                            "No change"
-                          )}
-                        </p>
+                      <div className="flex flex-col gap-1">
+                        {user.profile.bio && (
+                          <p
+                            className="text-xs text-gray-500 line-clamp-1"
+                            title={user.profile.bio}
+                          >
+                            {user.profile.bio}
+                          </p>
+                        )}
+                        <div>
+                          <p className="font-medium text-gray-900">
+                            {user.profile.display_name ??
+                              user.profile.name ??
+                              "Anon"}
+                          </p>
+                          <p className="text-xs text-gray-500">
+                            {change.label !== "—" ? (
+                              <span
+                                className={
+                                  change.tone === "positive"
+                                    ? "text-emerald-600"
+                                    : change.tone === "negative"
+                                    ? "text-rose-600"
+                                    : "text-gray-500"
+                                }
+                              >
+                                {change.label}
+                              </span>
+                            ) : (
+                              "No change"
+                            )}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </td>
