@@ -47,7 +47,7 @@ export default function LeaderboardFilters({
           <option value="syndicate">Syndicate</option>
         </select>
 
-        <div className="flex items-center gap-2 rounded-[8px] bg-gray-50 p-1">
+        <div className="flex items-center gap-2 rounded-[8px] border border-gray-200 bg-gray-50 p-1">
           {segments.map((segment) => (
             <button
               key={segment.value}
