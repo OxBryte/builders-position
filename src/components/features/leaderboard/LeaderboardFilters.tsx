@@ -3,8 +3,8 @@ import type { ChangeEvent } from "react";
 type LeaderboardFiltersProps = {
   sponsorSlug: string;
   onSponsorChange: (slug: string) => void;
-  timeframe: "all" | "week" | "month";
-  onTimeframeChange: (frame: "all" | "week" | "month") => void;
+  timeframe: "all" | "latest" | "lastMonth";
+  onTimeframeChange: (frame: "all" | "latest" | "lastMonth") => void;
   searchTerm: string;
   onSearchChange: (value: string) => void;
   resultsCount: number;
@@ -23,14 +23,16 @@ export default function LeaderboardFilters({
     onSponsorChange(event.target.value);
   };
 
-  const segments: Array<{ value: "all" | "week" | "month"; label: string }> = [
+  const segments: Array<
+    { value: "all" | "latest" | "lastMonth"; label: string }
+  > = [
     { value: "all", label: "All" },
-    { value: "week", label: "This Week" },
-    { value: "month", label: "Last Month" },
+    { value: "latest", label: "Latest" },
+    { value: "lastMonth", label: "Last Month" },
   ];
 
   return (
-    <div className="space-y-4 mt-3">
+    <div className="mt-3 space-y-4">
       <div className="flex flex-col rounded-lg gap-3 border border-gray-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
         <select
           id="sponsor-filter"

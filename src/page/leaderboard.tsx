@@ -4,12 +4,40 @@ import LeaderboardTable from "../components/features/leaderboard/LeaderboardTabl
 import LeaderboardPagination from "../components/features/leaderboard/LeaderboardPagination";
 import LeaderboardFilters from "../components/features/leaderboard/LeaderboardFilters";
 
+function resolveGrantId(
+  sponsor: string,
+  timeframe: "all" | "latest" | "lastMonth",
+): number | undefined {
+  if (timeframe === "all") {
+    return undefined;
+  }
+
+  if (sponsor === "walletconnect") {
+    return timeframe === "latest" ? 710 : 704;
+  }
+
+  if (sponsor === "base") {
+    return 148;
+  }
+
+  if (sponsor === "base-summer") {
+    return timeframe === "lastMonth" ? 608 : undefined;
+  }
+
+  // syndicate and others default to undefined
+  return undefined;
+}
+
 export default function LeaderboardPage() {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [sponsorSlug, setSponsorSlug] = useState("walletconnect");
-  const [grantId, setGrantId] = useState<number | undefined>(undefined);
-  const [timeframe, setTimeframe] = useState<"all" | "week" | "month">("all");
+  const [timeframe, setTimeframe] = useState<"all" | "latest" | "lastMonth">(
+    "all",
+  );
+  const [grantId, setGrantId] = useState<number | undefined>(() =>
+    resolveGrantId("walletconnect", "all"),
+  );
 
   const { data, isLoading, error, isFetching } = useLeaderboard({
     perPage: searchTerm ? 200 : 30,
@@ -68,24 +96,13 @@ export default function LeaderboardPage() {
         onSponsorChange={(slug) => {
           setSponsorSlug(slug);
           setPage(1);
-          switch (slug) {
-            case "walletconnect":
-              setGrantId(710);
-              break;
-            case "base-summer":
-              setGrantId(undefined);
-              break;
-            case "base":
-              setGrantId(undefined);
-              break;
-            default:
-              setGrantId(undefined);
-          }
+          setGrantId(resolveGrantId(slug, timeframe));
         }}
         timeframe={timeframe}
         onTimeframeChange={(frame) => {
           setTimeframe(frame);
           setPage(1);
+          setGrantId(resolveGrantId(sponsorSlug, frame));
         }}
         searchTerm={searchTerm}
         onSearchChange={(value) => {
