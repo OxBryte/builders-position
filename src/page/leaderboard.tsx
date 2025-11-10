@@ -17,7 +17,7 @@ function resolveGrantId(
   }
 
   if (sponsor === "base") {
-    return 148;
+    return timeframe === "lastWeek" ? 141 : 148;
   }
 
   if (sponsor === "base-summer") {
