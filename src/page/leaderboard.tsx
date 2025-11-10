@@ -36,7 +36,7 @@ export default function LeaderboardPage() {
 
     return {
       highlights: data.users.slice(0, 3),
-      rest: data.users.slice(3),
+      rest: data.users,
     };
   }, [data?.users]);
 
