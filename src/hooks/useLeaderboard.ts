@@ -46,10 +46,9 @@ const DEFAULT_BASE = import.meta.env.DEV
   ? "/builderscore"
   : "https://www.builderscore.xyz/api";
 
-const BASE_URL = (import.meta.env.VITE_BUILDERSCORE_API ?? DEFAULT_BASE).replace(
-  /\/$/,
-  "",
-);
+const BASE_URL = (
+  import.meta.env.VITE_BUILDERSCORE_API ?? DEFAULT_BASE
+).replace(/\/$/, "");
 
 type NormalizedOptions = {
   perPage: number;
@@ -80,11 +79,14 @@ function buildQuery({
 }
 
 async function fetchLeaderboard(params: NormalizedOptions) {
-  const response = await fetch(`${BASE_URL}/leaderboards?${buildQuery(params)}`, {
-    headers: {
-      Accept: "application/json",
-    },
-  });
+  const response = await fetch(
+    `${BASE_URL}/leaderboards?${buildQuery(params)}`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  );
 
   if (!response.ok) {
     throw new Error(`Request failed with status ${response.status}`);
@@ -110,7 +112,7 @@ export function useLeaderboard(options: UseLeaderboardOptions = {}) {
       sponsorSlug,
       grantId,
     }),
-    [perPage, page, sponsorSlug, grantId],
+    [perPage, page, sponsorSlug, grantId]
   );
 
   const query = useQuery<LeaderboardResponse, Error>({

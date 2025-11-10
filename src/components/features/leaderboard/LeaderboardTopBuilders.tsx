@@ -42,9 +42,7 @@ export default function LeaderboardTopBuilders({
             key={user.id}
             className="group relative overflow-hidden rounded-3xl border border-gray-200 bg-white/90 text-gray-900 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
           >
-            <div
-              className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/30"
-            />
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/30" />
             <div className="relative flex h-full flex-col gap-6 p-6">
               <header className="flex items-start gap-4">
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-2xl">
@@ -77,9 +75,13 @@ export default function LeaderboardTopBuilders({
                 <img
                   src={
                     user.profile.image_url ??
-                    `https://avatar.vercel.sh/${user.profile.display_name ?? "anon"}`
+                    `https://avatar.vercel.sh/${
+                      user.profile.display_name ?? "anon"
+                    }`
                   }
-                  alt={user.profile.display_name ?? user.profile.name ?? "Builder"}
+                  alt={
+                    user.profile.display_name ?? user.profile.name ?? "Builder"
+                  }
                   className="h-14 w-14 rounded-3xl border border-gray-200 object-cover shadow-sm"
                 />
               </header>
@@ -158,4 +160,3 @@ export default function LeaderboardTopBuilders({
     </section>
   );
 }
-
