@@ -1,0 +1,134 @@
+import { formatNumber } from "../../lib/utils";
+import type { LeaderboardUser } from "./types";
+
+type LeaderboardTableProps = {
+  users: LeaderboardUser[];
+};
+
+function getBuilderScore(user: LeaderboardUser) {
+  return (
+    user.profile.scores?.find((score) => score.slug === "builder_score") ??
+    user.profile.scores?.[0]
+  );
+}
+
+function formatRankingChange(change: number | null | undefined) {
+  if (change === null || change === undefined) {
+    return { label: "—", tone: "neutral" as const };
+  }
+
+  if (change === 0) return { label: "0", tone: "neutral" as const };
+  if (change > 0) return { label: `▲ ${change}`, tone: "positive" as const };
+
+  return { label: `▼ ${Math.abs(change)}`, tone: "negative" as const };
+}
+
+export default function LeaderboardTable({ users }: LeaderboardTableProps) {
+  if (!users?.length) {
+    return null;
+  }
+
+  return (
+    <section className="space-y-4">
+      <header className="flex items-center justify-between">
+        <h2 className="text-lg font-semibold text-gray-900">Trending Builders</h2>
+        <p className="text-xs uppercase tracking-wide text-gray-400">
+          {users.length} builders
+        </p>
+      </header>
+      <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm ring-1 ring-black/5">
+        <table className="min-w-full divide-y divide-gray-100 text-sm">
+          <thead className="bg-gray-50 text-xs uppercase tracking-wide text-gray-500">
+            <tr>
+              <th scope="col" className="px-4 py-3 text-left">
+                Rank
+              </th>
+              <th scope="col" className="px-4 py-3 text-left">
+                Builder
+              </th>
+              <th
+                scope="col"
+                className="hidden px-4 py-3 text-left sm:table-cell"
+              >
+                Summary
+              </th>
+              <th scope="col" className="px-4 py-3 text-right">
+                Score
+              </th>
+              <th scope="col" className="px-4 py-3 text-right">
+                Reward
+              </th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100">
+            {users.map((user) => {
+              const builderScore = getBuilderScore(user);
+              const change = formatRankingChange(user.ranking_change);
+
+              return (
+                <tr
+                  key={user.id}
+                  className="transition hover:bg-gray-50/80 hover:shadow-sm"
+                >
+                  <td className="px-4 py-3 font-semibold text-gray-700">
+                    #{user.leaderboard_position}
+                  </td>
+                  <td className="px-4 py-3">
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={
+                          user.profile.image_url ??
+                          `https://avatar.vercel.sh/${user.profile.display_name ?? "anon"}`
+                        }
+                        alt={user.profile.display_name ?? "Builder"}
+                        className="h-10 w-10 rounded-xl border border-gray-200 object-cover shadow-sm"
+                      />
+                      <div>
+                        <p className="font-medium text-gray-900">
+                          {user.profile.display_name ?? user.profile.name ?? "Anon"}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          {change.label !== "—" ? (
+                            <span
+                              className={
+                                change.tone === "positive"
+                                  ? "text-emerald-600"
+                                  : change.tone === "negative"
+                                  ? "text-rose-600"
+                                  : "text-gray-500"
+                              }
+                            >
+                              {change.label}
+                            </span>
+                          ) : (
+                            "No change"
+                          )}
+                        </p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="hidden max-w-xs px-4 py-3 text-gray-600 sm:table-cell">
+                    {user.summary ? (
+                      <p className="line-clamp-3 text-xs leading-relaxed">
+                        {user.summary}
+                      </p>
+                    ) : (
+                      <span className="text-xs text-gray-400">No summary yet</span>
+                    )}
+                  </td>
+                  <td className="px-4 py-3 text-right font-semibold text-blue-600">
+                    {builderScore?.points ?? 0}
+                  </td>
+                  <td className="px-4 py-3 text-right font-semibold text-amber-600">
+                    {formatNumber(user.reward_amount ?? 0)}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
