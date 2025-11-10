@@ -6,7 +6,7 @@ import LeaderboardPagination from "../components/features/leaderboard/Leaderboar
 
 export default function LeaderboardPage() {
   const [page, setPage] = useState(1);
-  const { data, isLoading, error } = useLeaderboard({
+  const { data, isLoading, error, isFetching } = useLeaderboard({
     perPage: 30,
     sponsorSlug: "walletconnect",
     grantId: 710,
@@ -80,7 +80,7 @@ export default function LeaderboardPage() {
             total={totalEntries}
             onPrev={() => setPage((prev) => Math.max(1, prev - 1))}
             onNext={() => setPage((prev) => Math.min(totalPages, prev + 1))}
-            isLoading={isLoading}
+            isFetching={isFetching && !isLoading}
           />
         </>
       ) : null}

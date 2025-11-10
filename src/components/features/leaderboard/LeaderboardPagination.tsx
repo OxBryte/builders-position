@@ -41,7 +41,7 @@ export default function LeaderboardPagination({
         <button
           type="button"
           onClick={onPrev}
-          disabled={currentPage <= 1}
+          disabled={currentPage <= 1 || isFetching}
           className="inline-flex items-center gap-1 rounded-full border border-gray-200 px-4 py-2 text-sm font-medium text-gray-600 transition hover:border-gray-300 hover:text-gray-900 disabled:cursor-not-allowed disabled:opacity-40"
         >
           ← Previous
@@ -49,7 +49,7 @@ export default function LeaderboardPagination({
         <button
           type="button"
           onClick={onNext}
-          disabled={currentPage >= lastPage}
+          disabled={currentPage >= lastPage || isFetching}
           className="inline-flex items-center gap-1 rounded-full border border-blue-500 bg-blue-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:border-blue-200 disabled:bg-blue-200 disabled:text-white/70"
         >
           Next →
