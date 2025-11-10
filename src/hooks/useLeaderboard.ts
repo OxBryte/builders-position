@@ -46,7 +46,7 @@ const BASE_URL = "https://www.builderscore.xyz/api/leaderboards";
 type NormalizedOptions = Required<
   Pick<UseLeaderboardOptions, "perPage" | "page"> & {
     sponsorSlug?: string;
-    grantId?: number;
+    grantId?: string | number;
   }
 >;
 
