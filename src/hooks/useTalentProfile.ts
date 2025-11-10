@@ -46,7 +46,7 @@ type TalentAccountsResponse =
       account?: TalentAccount;
     };
 
-const TALENT_API_URL = "https://api.talentprotocol.com/accounts";
+const TALENT_API_URL = `${import.meta.env.VITE_API_URL}/accounts`;
 
 function extractAccount(payload: TalentAccountsResponse | null): TalentAccount | null {
   if (!payload || typeof payload !== "object") {
