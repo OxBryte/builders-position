@@ -28,17 +28,27 @@ function run(command, args, options = {}) {
   return result.stdout ?? "";
 }
 
-function commitOnce(baseMessage) {
-  const status = run("git", ["status", "--porcelain"]).trim();
+function commitOnce() {
+  const statusRaw = run("git", ["status", "--porcelain"]).trim();
 
-  if (!status) {
+  if (!statusRaw) {
     return false;
   }
 
-  const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-  const message = baseMessage
-    ? `${baseMessage} ${timestamp}`
-    : `Auto commit ${timestamp}`;
+  const statusLines = statusRaw.split("\n").filter(Boolean);
+  const filesChanged = statusLines.map((line) => {
+    const renameMatch = line.match(/^R.\s+(.*?)\s+->\s+(.*)$/);
+    if (renameMatch) {
+      return renameMatch[2];
+    }
+
+    const simplified = line.slice(3).trim();
+    return simplified || line.trim();
+  });
+
+  const message = `made update to ${
+    filesChanged.length ? ` - ${filesChanged.join(", ")}` : ""
+  }`;
 
   run("git", ["add", "--all"]);
   run("git", ["commit", "-m", message]);
@@ -48,8 +58,6 @@ function commitOnce(baseMessage) {
 }
 
 function main() {
-  const baseMessage = process.argv.slice(2).join(" ").trim();
-
   console.log(
     `Auto-commit watcher running (every ${
       INTERVAL_MS / 1000
@@ -58,7 +66,7 @@ function main() {
 
   const tick = () => {
     try {
-      const committed = commitOnce(baseMessage);
+      const committed = commitOnce();
       if (!committed) {
         console.log("No changes to commit.");
       }
