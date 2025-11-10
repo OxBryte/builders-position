@@ -90,19 +90,8 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                           className="h-14 w-14 rounded-xl border border-gray-200 object-cover shadow-sm"
                         />
                         {user.profile.human_checkmark ? (
-                          <span className="absolute bottom-2 right-2 inline-flex h-3 w-3 items-center justify-center rounded-full bg-blue-500 text-white shadow-sm ring-2 ring-white">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 20 20"
-                              fill="currentColor"
-                              className="h-3.5 w-3.5"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-7.25 7.25a1 1 0 01-1.414 0l-3.25-3.25a1 1 0 111.414-1.414L8.5 11.086l6.543-6.543a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
+                          <span className="absolute bottom-2 right-2 inline-flex h-3 w-3 items-center justify-center rounded-full bg-blue-500">
+                            <che>
                           </span>
                         ) : null}
                       </div>
