@@ -68,7 +68,7 @@ export default function LeaderboardPage() {
         </p>
       </header>
       <div className="">
-        <div className="flex items-2 gap-2">
+        <div className="flex items-center gap-2">
           <input
             type="search"
             value={searchTerm}
@@ -82,15 +82,15 @@ export default function LeaderboardPage() {
             placeholder="Search by name, bio, summary, or rank…"
             className="w-full rounded-md border border-gray-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-blue-400 focus:ring focus:ring-blue-100"
           />
-          {searchTerm ? (
+          {/* {searchTerm ? (
             <button
               type="button"
               onClick={() => setSearchTerm("")}
-              className="rounded-lg border border-gray-200 h-fit px-3 py-2 text-xs font-medium text-gray-500 transition hover:border-gray-300 hover:text-gray-700"
+              className="rounded-lg border border-gray-200 px-3 py-2 text-xs font-medium text-gray-500 transition hover:border-gray-300 hover:text-gray-700"
             >
               Clear
             </button>
-          ) : null}
+          ) : null} */}
         </div>
         {searchTerm ? (
           <p className="mt-2 text-xs text-gray-500">
