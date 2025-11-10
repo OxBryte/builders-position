@@ -8,9 +8,9 @@ export default function Navbar() {
 
   return (
     <nav className="flex items-center justify-between gap-6 py-4">
-      <div className="flex flex-1 items-center gap-6">
+      <div className="flex flex-1 flex-wrap items-center gap-4 sm:gap-6">
         <span className="text-lg font-semibold tracking-wide">Builders Position</span>
-        <div className="hidden items-center gap-4 text-sm font-medium text-gray-500 sm:flex">
+        <div className="flex items-center gap-4 text-sm font-medium text-gray-500">
           <NavLink
             to="/"
             className={({ isActive }) =>
