@@ -1,7 +1,6 @@
 import { formatNumber, truncateText } from "../../lib/utils";
 import { useWctPrice } from "../../../hooks/useWctPrice";
 import type { LeaderboardUser } from "./types";
-import { GoCheckCircleFill } from "react-icons/go";
 
 type LeaderboardTableProps = {
   users: LeaderboardUser[];
@@ -90,11 +89,6 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                           alt={user.profile.display_name ?? "Builder"}
                           className="h-14 w-14 rounded-xl border border-gray-200 object-cover shadow-sm"
                         />
-                        {user.profile.human_checkmark ? (
-                          <span className="absolute bottom-2 right-2 inline-flex items-center justify-center rounded-full">
-                            <GoCheckCircleFill className="text-blue-500 bg-white rounded-full" size={16} />
-                          </span>
-                        ) : null}
                       </div>
                       <div className="flex flex-col gap-1">
                         {user.profile.bio && (
