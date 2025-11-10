@@ -68,7 +68,7 @@ export default function LeaderboardPage() {
         </p>
       </header>
 
-      <div className="rounded-3xl border border-gray-200 bg-[var(--card-bg)] p-4 shadow-sm">
+      <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm">
         <label className="block text-sm font-medium text-gray-600">
           Search builders
         </label>
