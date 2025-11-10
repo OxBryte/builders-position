@@ -1,5 +1,7 @@
+import { useAppKit } from "@reown/appkit/react";
+
 export default function Navbar() {
-  // const { open } = useAppKit();
+  const { open } = useAppKit();
 
   return (
     <nav className="flex items-center justify-between py-4">
