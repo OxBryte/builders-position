@@ -13,6 +13,8 @@ export default function LeaderboardPage() {
     page: searchTerm ? 1 : page,
   });
 
+  console.log("data", data);
+
   const pagination = data?.pagination;
   const totalPages = pagination?.last_page ?? 1;
   const totalEntries = pagination?.total ?? 0;
