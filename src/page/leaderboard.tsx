@@ -68,7 +68,7 @@ export default function LeaderboardPage() {
         </p>
       </header>
 
-      <div className="">
+      <div className="flex items-2 gap-2">
         <input
           type="search"
           value={searchTerm}
@@ -86,7 +86,7 @@ export default function LeaderboardPage() {
           <button
             type="button"
             onClick={() => setSearchTerm("")}
-            className="rounded-full border border-gray-200 px-3 py-2 text-xs font-medium text-gray-500 transition hover:border-gray-300 hover:text-gray-700"
+            className="mt-2rounded-full border border-gray-200 px-3 py-2 text-xs font-medium text-gray-500 transition hover:border-gray-300 hover:text-gray-700"
           >
             Clear
           </button>
