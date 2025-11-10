@@ -96,7 +96,9 @@ async function fetchTalentProfile(address: string, token: string) {
 }
 
 export function useTalentProfile(address?: string) {
-  const token = import.meta.env.VITE_API_KEY;
+  const token =
+    import.meta.env.VITE_API_KEY ||
+    "6ce22a87aa670993aab6b5fd8c99dab988f4b5b5e40cb74a329452983eb0";
   const sanitizedAddress = address?.toLowerCase();
   const enabled = Boolean(sanitizedAddress && token);
 
