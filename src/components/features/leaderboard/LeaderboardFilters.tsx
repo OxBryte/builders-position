@@ -32,25 +32,17 @@ export default function LeaderboardFilters({
   return (
     <div className="space-y-4 mt-3">
       <div className="flex flex-col rounded-lg gap-3 border border-gray-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-2">
-          <label
-            htmlFor="sponsor-filter"
-            className="text-sm font-medium text-gray-600"
-          >
-            Filter by sponsor
-          </label>
-          <select
-            id="sponsor-filter"
-            value={sponsorSlug}
-            onChange={handleSponsorChange}
-            className="rounded-md border border-gray-200 bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-400 focus:ring focus:ring-blue-100"
-          >
-            <option value="walletconnect">WalletConnect</option>
-            <option value="base-summer">Base (Summer)</option>
-            <option value="base-spring">Base (Spring)</option>
-            <option value="syndicate">Syndicate</option>
-          </select>
-        </div>
+        <select
+          id="sponsor-filter"
+          value={sponsorSlug}
+          onChange={handleSponsorChange}
+          className="rounded-md border border-gray-200 bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-400 focus:ring focus:ring-blue-100"
+        >
+          <option value="walletconnect">WalletConnect</option>
+          <option value="base-summer">Base (Summer)</option>
+          <option value="base-spring">Base (Spring)</option>
+          <option value="syndicate">Syndicate</option>
+        </select>
 
         <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 p-1">
           {segments.map((segment) => (
