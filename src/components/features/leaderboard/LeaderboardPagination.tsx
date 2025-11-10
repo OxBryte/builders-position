@@ -20,7 +20,7 @@ export default function LeaderboardPagination({
   }
 
   return (
-    <footer className="flex flex-col items-center justify-between gap-4 rounded-3xl border border-gray-100 bg-[var(--card-bg)] p-4 shadow-sm ring-1 ring-black/5 sm:flex-row sm:gap-6">
+    <footer className="flex flex-col items-center justify-between gap-4 rounded-lg border border-gray-100 bg-white p-4 sm:flex-row sm:gap-6">
       <div className="text-sm text-gray-500">
         Page{" "}
         <span className="font-semibold text-gray-900">{currentPage}</span> of{" "}
