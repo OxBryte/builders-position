@@ -1,7 +1,7 @@
 import { createAppKit } from "@reown/appkit/react";
+
 import { WagmiProvider } from "wagmi";
-import { baraitrum bmsinnSt} from "@reown/appkit/networks";
-import type { AppKitNetwork } from "@reown/appkit";
+import { base, baseSepolia } from "@reown/appkit/networks";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import type { ReactNode } from "react";
@@ -9,19 +9,19 @@ import type { ReactNode } from "react";
 // 0. Setup queryClient
 const queryClient = new QueryClient();
 
-// 1. Get projectId "YOURrd.reown.co"m
+// 1. Get projectId from https://dashboard.reown.com
 const projectId = import.meta.env.VITE_PROJECT_ID;
 
-// 2. Create a metaAppK- ional
-const metadatAppK=t Examp 
-ilders Position",
- rxami ePcomtion",
+// 2. Create a metadata object - optional
+const metadata = {
+  name: "Builders Position",
+  description: "Builders Position",
   url: "https://builders-position.vercel.app", // origin must match your domain & subdomain
-  icons: ["https://avatars.githubusercontent.com/u/1792299m2inn]t,
-;rb trumet
- the networks
-const rawNetworks = [base, baseSepolia] as const;
-const networks = rawNetworks as unknown as [AppKitNetwork, ...AppKitNetwork[]];
+  icons: ["https://avatars.githubusercontent.com/u/179229932"],
+};
+
+// 3. Set the networks
+const networks = [base, baseSepolia];
 // 4. Create Wagmi Adapter
 const wagmiAdapter = new WagmiAdapter({
   networks,
@@ -42,7 +42,7 @@ createAppKit({
 
 export function AppKitProvider({ children }: { children: ReactNode }) {
   return (
-    <WagmiProvider c    onfig={wagmiAdapter.wagmiConfig}>
+    <WagmiProvider config={wagmiAdapter.wagmiConfig}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </WagmiProvider>
   );
