@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export type LeaderboardUser = {
   id: number;
@@ -42,12 +43,19 @@ export type UseLeaderboardOptions = {
 
 const BASE_URL = "https://www.builderscore.xyz/api/leaderboards";
 
+type NormalizedOptions = Required<
+  Pick<UseLeaderboardOptions, "perPage" | "page"> & {
+    sponsorSlug?: string;
+    grantId?: string | number;
+  }
+>;
+
 function buildQuery({
   perPage = 50,
   page = 1,
   sponsorSlug,
   grantId,
-}: UseLeaderboardOptions) {
+}: NormalizedOptions) {
   const params = new URLSearchParams();
   params.set("per_page", String(perPage));
   params.set("page", String(page));
@@ -63,52 +71,49 @@ function buildQuery({
   return params.toString();
 }
 
-export function useLeaderboard(options: UseLeaderboardOptions = {}) {
-  const { enabled = true, ...queryOptions } = options;
-  const [data, setData] = useState<LeaderboardResponse | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+async function fetchLeaderboard(params: NormalizedOptions) {
+  const response = await fetch(`${BASE_URL}?${buildQuery(params)}`);
 
-  useEffect(() => {
-    if (!enabled) {
-      return;
-    }
+  if (!response.ok) {
+    throw new Error(`Request failed with status ${response.status}`);
+  }
 
-    const controller = new AbortController();
-    const fetchData = async () => {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const response = await fetch(
-          `${BASE_URL}?${buildQuery(queryOptions)}`,
-          { signal: controller.signal },
-        );
-
-        if (!response.ok) {
-          throw new Error(`Request failed with status ${response.status}`);
-        }
-
-        const json = (await response.json()) as LeaderboardResponse;
-        setData(json);
-      } catch (err) {
-        if ((err as Error).name === "AbortError") {
-          return;
-        }
-        setError(err as Error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-
-    return () => {
-      controller.abort();
-    };
-  }, [enabled, queryOptions.perPage, queryOptions.page, queryOptions.sponsorSlug, queryOptions.grantId]);
-
-  return { data, isLoading, error };
+  const json = (await response.json()) as LeaderboardResponse;
+  return json;
 }
 
+export function useLeaderboard(options: UseLeaderboardOptions = {}) {
+  const {
+    enabled = true,
+    perPage = 50,
+    page = 1,
+    sponsorSlug,
+    grantId,
+  } = options;
 
+  const queryParams = useMemo<NormalizedOptions>(
+    () => ({
+      perPage,
+      page,
+      sponsorSlug,
+      grantId,
+    }),
+    [perPage, page, sponsorSlug, grantId],
+  );
+
+  const query = useQuery<LeaderboardResponse, Error>({
+    queryKey: ["leaderboard", queryParams],
+    queryFn: () => fetchLeaderboard(queryParams),
+    enabled,
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
+  });
+
+  return {
+    data: query.data,
+    error: query.error,
+    isLoading: query.isLoading,
+    isFetching: query.isFetching,
+    refetch: query.refetch,
+  };
+}

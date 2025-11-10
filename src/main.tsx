@@ -4,17 +4,13 @@ import "./index.css";
 import App from "./App.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { AppKitProvider } from "@reown/appkit/react";
-import { base, baseSepolia } from "viem/chains";
+import { AppKitProvider } from "./Provider.tsx";
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AppKitProvider
-      projectId={import.meta.env.VITE_PROJECT_ID}
-      networks={[base, baseSepolia]}
-    >
+    <AppKitProvider>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
         <App />
