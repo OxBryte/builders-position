@@ -31,7 +31,9 @@ type CredentialsResponse =
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-function normalizeCredentials(payload: CredentialsResponse | null): TalentCredential[] {
+function normalizeCredentials(
+  payload: CredentialsResponse | null
+): TalentCredential[] {
   if (!payload) {
     return [];
   }
@@ -59,7 +61,9 @@ async function fetchCredentials(address: string, token: string) {
     throw new Error("Missing VITE_BASE_URL environment variable.");
   }
 
-  const url = new URL(`${BASE_URL.replace(/\/$/, "")}/accounts/${address}/credentials`);
+  const url = new URL(
+    `${BASE_URL.replace(/\/$/, "")}/accounts/${address}/credentials`
+  );
 
   const response = await fetch(url.toString(), {
     headers: {
@@ -69,7 +73,9 @@ async function fetchCredentials(address: string, token: string) {
   });
 
   if (!response.ok) {
-    throw new Error(`Talent Protocol credentials request failed (${response.status})`);
+    throw new Error(
+      `Talent Protocol credentials request failed (${response.status})`
+    );
   }
 
   const payload = (await response.json()) as CredentialsResponse;
@@ -101,4 +107,3 @@ export function useGetCredentials(address?: string) {
     tokenAvailable: Boolean(token),
   };
 }
-
