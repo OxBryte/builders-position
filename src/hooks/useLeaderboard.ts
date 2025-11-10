@@ -39,7 +39,7 @@ export type UseLeaderboardOptions = {
   perPage?: number;
   page?: number;
   sponsorSlug?: string;
-  grantId?: string | number;
+  grantId?: string | number | undefined;
   enabled?: boolean;
 };
 
@@ -55,7 +55,7 @@ type NormalizedOptions = {
   perPage: number;
   page: number;
   sponsorSlug: string;
-  grantId: string | number;
+  grantId: string | number | undefined;
 };
 
 function buildQuery({
@@ -103,7 +103,7 @@ export function useLeaderboard(options: UseLeaderboardOptions = {}) {
     perPage = 50,
     page = 1,
     sponsorSlug = "walletconnect",
-    grantId = 710,
+    grantId = undefined,
   } = options;
 
   const queryParams = useMemo<NormalizedOptions>(
