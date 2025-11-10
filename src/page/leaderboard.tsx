@@ -7,7 +7,7 @@ import LeaderboardPagination from "../components/features/leaderboard/Leaderboar
 export default function LeaderboardPage() {
   const [page, setPage] = useState(1);
   const { data, isLoading, error } = useLeaderboard({
-    perPage: 10,
+    perPage: 30,
     sponsorSlug: "walletconnect",
     grantId: 710,
     page,

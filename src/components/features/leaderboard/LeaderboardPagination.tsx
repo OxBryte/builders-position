@@ -2,7 +2,7 @@ type LeaderboardPaginationProps = {
   currentPage: number;
   lastPage: number;
   total?: number;
-  isLoading?: boolean;
+  isFetching?: boolean;
   onPrev: () => void;
   onNext: () => void;
 };
@@ -11,7 +11,7 @@ export default function LeaderboardPagination({
   currentPage,
   lastPage,
   total,
-  isLoading,
+  isFetching,
   onPrev,
   onNext,
 }: LeaderboardPaginationProps) {
@@ -31,7 +31,7 @@ export default function LeaderboardPagination({
             • <span className="font-medium text-gray-900">{total}</span> builders
           </>
         ) : null}
-        {isLoading ? (
+        {isFetching ? (
           <span className="ml-2 inline-flex items-center text-xs text-blue-500">
             Updating…
           </span>
