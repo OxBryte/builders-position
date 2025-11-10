@@ -55,6 +55,9 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
               <th scope="col" className="px-4 py-3 text-left !font-medium">
                 Builder
               </th>
+              <th scope="col" className="px-4 py-3 text-center !font-medium">
+                Change
+              </th>
               <th scope="col" className="px-4 py-3 text-right !font-medium">
                 Score
               </th>
@@ -99,32 +102,32 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                             {truncateText(user.profile.bio, 40)}
                           </p>
                         )}
-                        <div>
-                          <p className="font-medium text-gray-900">
-                            {user.profile.display_name ??
-                              user.profile.name ??
-                              "Anon"}
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            {change.label !== "—" ? (
-                              <span
-                                className={
-                                  change.tone === "positive"
-                                    ? "text-emerald-600"
-                                    : change.tone === "negative"
-                                    ? "text-rose-600"
-                                    : "text-gray-500"
-                                }
-                              >
-                                {change.label}
-                              </span>
-                            ) : (
-                              "No change"
-                            )}
-                          </p>
-                        </div>
+                        <p className="font-medium text-gray-900">
+                          {user.profile.display_name ??
+                            user.profile.name ??
+                            "Anon"}
+                        </p>
                       </div>
                     </div>
+                  </td>
+                  <td className="px-4 py-3 text-center text-xs font-semibold">
+                    {change.label !== "—" ? (
+                      <span
+                        className={
+                          change.tone === "positive"
+                            ? "inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-emerald-600"
+                            : change.tone === "negative"
+                            ? "inline-flex items-center gap-1 rounded-full bg-rose-50 px-3 py-1 text-rose-600"
+                            : "inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-gray-600"
+                        }
+                      >
+                        {change.label}
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-gray-500">
+                        No change
+                      </span>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-right font-semibold text-blue-600">
                     {builderScore?.points ?? 0}
