@@ -9,7 +9,10 @@ export default function Navbar() {
     <nav className="flex items-center justify-between py-4">
       <span className="text-xl font-semibold tracking-wide">Your Logo</span>
       {isConnected ? (
-        <div className="flex items-center gap-2 ">
+        <div
+          className="flex items-center gap-2 border border-gray-200 rounded-full px-4 py-2 text-sm"
+          onClick={() => open()}
+        >
           <span>{truncateAddress(address)}</span>
         </div>
       ) : (
