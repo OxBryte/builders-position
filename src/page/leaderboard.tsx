@@ -71,41 +71,101 @@ export default function LeaderboardPage() {
           WalletConnect-funded projects.
         </p>
       </header>
-      <div className="">
-        <div className="flex items-center gap-2">
-          <input
-            type="search"
-            value={searchTerm}
-            onChange={(event) => {
-              const value = event.target.value;
-              setSearchTerm(value);
-              if (value) {
-                setPage(1);
-              }
-            }}
-            placeholder="Search by name, bio, summary, or rank…"
-            className="w-full rounded-md border border-gray-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-blue-400 focus:ring focus:ring-blue-100"
-          />
-          {/* {searchTerm ? (
-            <button
-              type="button"
-              onClick={() => setSearchTerm("")}
-              className="rounded-lg border border-gray-200 px-3 py-2 text-xs font-medium text-gray-500 transition hover:border-gray-300 hover:text-gray-700"
+      <div className="space-y-4">
+        <div className="flex flex-col gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-2">
+            <label
+              htmlFor="sponsor-filter"
+              className="text-sm font-medium text-gray-600"
             >
-              Clear
-            </button>
-          ) : null} */}
+              Filter by sponsor
+            </label>
+            <select
+              id="sponsor-filter"
+              value={sponsorSlug}
+              onChange={(event) => {
+                const value = event.target.value;
+                setSponsorSlug(value);
+                setPage(1);
+
+                switch (value) {
+                  case "walletconnect":
+                    setGrantId(710);
+                    break;
+                  case "base-summer":
+                    setGrantId(414);
+                    break;
+                  case "base-spring":
+                    setGrantId(511);
+                    break;
+                  default:
+                    setGrantId(undefined);
+                }
+              }}
+              className="rounded-md border border-gray-200 bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-400 focus:ring focus:ring-blue-100"
+            >
+              <option value="walletconnect">WalletConnect</option>
+              <option value="base-summer">Base (Summer)</option>
+              <option value="base-spring">Base (Spring)</option>
+              <option value="syndicate">Syndicate</option>
+            </select>
+          </div>
+
+          <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 p-1">
+            {[
+              { value: "all", label: "All" },
+              { value: "week", label: "This Week" },
+              { value: "month", label: "Last Month" },
+            ].map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => {
+                  setTimeframe(option.value as typeof timeframe);
+                  setPage(1);
+                }}
+                className={[
+                  "rounded-full px-4 py-1.5 text-sm font-medium transition",
+                  timeframe === option.value
+                    ? "bg-white text-blue-600 shadow-sm"
+                    : "text-gray-500 hover:text-gray-700",
+                ].join(" ")}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
         </div>
-        {searchTerm ? (
-          <p className="mt-2 text-xs text-gray-500">
-            Showing{" "}
-            <span className="font-semibold text-gray-700">
-              {filteredUsers.length}
-            </span>{" "}
-            result{filteredUsers.length === 1 ? "" : "s"} for{" "}
-            <span className="font-semibold text-gray-700">“{searchTerm}”</span>
-          </p>
-        ) : null}
+
+        <div>
+          <div className="flex items-center gap-2">
+            <input
+              type="search"
+              value={searchTerm}
+              onChange={(event) => {
+                const value = event.target.value;
+                setSearchTerm(value);
+                if (value) {
+                  setPage(1);
+                }
+              }}
+              placeholder="Search by name, bio, summary, or rank…"
+              className="w-full rounded-md border border-gray-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-blue-400 focus:ring focus:ring-blue-100"
+            />
+          </div>
+          {searchTerm ? (
+            <p className="mt-2 text-xs text-gray-500">
+              Showing{" "}
+              <span className="font-semibold text-gray-700">
+                {filteredUsers.length}
+              </span>{" "}
+              result{filteredUsers.length === 1 ? "" : "s"} for{" "}
+              <span className="font-semibold text-gray-700">
+                “{searchTerm}”
+              </span>
+            </p>
+          ) : null}
+        </div>
       </div>
 
       {error && (
