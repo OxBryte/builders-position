@@ -12,9 +12,9 @@ export default function Navbar() {
         Builders Position
       </span>
 
-      <div className="flex items-center gap-4 text-sm font-medium text-gray-500">
-        <NavLink to="/leaderboard">Leaderboard</NavLink>
+      <div className="flex items-center gap-3 text-sm font-medium text-gray-500">
         <NavLink to="/profile">Profile</NavLink>
+        <NavLink to="/leaderboard">Leaderboard</NavLink>
         {isConnected ? (
           <div
             className="flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm"
