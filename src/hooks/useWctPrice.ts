@@ -1,28 +1,52 @@
 import { useQuery } from "@tanstack/react-query";
 
-const COINGECKO_ENDPOINT =
-  "https://api.coingecko.com/api/v3/simple/price?ids=walletconnect-token&vs_currencies=usd";
+const LLAMA_SOURCES = [
+  {
+    key: "coingecko:walletconnect-token",
+    url: "https://coins.llama.fi/prices/current/coingecko:walletconnect-token",
+  },
+  {
+    key: "coingecko:walletconnect",
+    url: "https://coins.llama.fi/prices/current/coingecko:walletconnect",
+  },
+  {
+    key: "ethereum:0x0cec1a9154ff802e7934fc916ed7ca50e7f7310f",
+    url: "https://coins.llama.fi/prices/current/ethereum:0x0cec1a9154ff802e7934fc916ed7ca50e7f7310f",
+  },
+];
 
-type CoingeckoResponse = {
-  "walletconnect-token"?: {
-    usd?: number;
-  };
+type LlamaResponse = {
+  coins?: Record<string, { price?: number }>;
 };
 
 async function fetchWctPrice(): Promise<number | null> {
-  const response = await fetch(COINGECKO_ENDPOINT, {
-    headers: {
-      Accept: "application/json",
-    },
-  });
+  for (const source of LLAMA_SOURCES) {
+    try {
+      const response = await fetch(source.url, {
+        headers: {
+          Accept: "application/json",
+        },
+      });
 
-  if (!response.ok) {
-    throw new Error(`Coingecko request failed (${response.status})`);
+      if (!response.ok) {
+        continue;
+      }
+
+      const json = (await response.json()) as LlamaResponse;
+      const price = json?.coins?.[source.key]?.price;
+
+      if (typeof price === "number" && price > 0) {
+        return price;
+      }
+    } catch (error) {
+      console.warn(
+        `[useWctPrice] Failed to fetch price from ${source.key}`,
+        (error as Error).message
+      );
+    }
   }
 
-  const json = (await response.json()) as CoingeckoResponse;
-  const price = json["walletconnect-token"]?.usd;
-  return typeof price === "number" && price > 0 ? price : null;
+  return null;
 }
 
 export function useWctPrice() {
@@ -41,4 +65,3 @@ export function useWctPrice() {
     refetch: query.refetch,
   };
 }
-
