@@ -14,9 +14,9 @@ const projectId = import.meta.env.VITE_PROJECT_ID;
 
 // 2. Create a metadata object - optional
 const metadata = {
-  name: "AppKit",
-  description: "AppKit Example",
-  url: "https://example.com", // origin must match your domain & subdomain
+  name: "Builders Position",
+  description: "Builders Position",
+  url: "https://builders-position.vercel.app", // origin must match your domain & subdomain
   icons: ["https://avatars.githubusercontent.com/u/179229932"],
 };
 
@@ -47,4 +47,3 @@ export function AppKitProvider({ children }: { children: ReactNode }) {
     </WagmiProvider>
   );
 }
-    
