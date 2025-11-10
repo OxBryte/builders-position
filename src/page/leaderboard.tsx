@@ -153,7 +153,7 @@ export default function LeaderboardPage() {
             <span>Loading leaderboard…</span>
           </div>
         ) : filteredUsers.length ? (
-          <LeaderboardTable users={filteredUsers} />
+          <LeaderboardTable users={filteredUsers} sponsorSlug={sponsorSlug} />
         ) : (
           <div className="rounded-3xl border border-gray-200 bg-[var(--card-bg)] p-6 text-center text-sm text-gray-500 shadow-sm">
             No builders matched your search.

@@ -24,7 +24,19 @@ function formatRankingChange(change: number | null | undefined) {
   return { label: `▼ ${Math.abs(change)}`, tone: "negative" as const };
 }
 
-export default function LeaderboardTable({ users }: LeaderboardTableProps) {
+type LeaderboardTableProps = {
+  users: LeaderboardUser[];
+  sponsorSlug?: string;
+};
+
+function getRewardSymbol(slug?: string) {
+  if (!slug) return "WCT";
+  if (slug.startsWith("base")) return "ETH";
+  if (slug === "syndicate") return "SYND";
+  return "WCT";
+}
+
+export default function LeaderboardTable({ users, sponsorSlug }: LeaderboardTableProps) {
   const {
     priceUsd,
     isLoading: priceLoading,
@@ -134,7 +146,10 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                   </td>
                   <td className="px-4 py-3 text-right font-medium text-green-600">
                     <div className="flex flex-col items-end">
-                      <span>{formatNumber(user.reward_amount ?? 0)} WCT</span>
+                      <span>
+                        {formatNumber(user.reward_amount ?? 0)}{" "}
+                        {getRewardSymbol(sponsorSlug)}
+                      </span>
                       <span className="text-xs font-medium text-gray-500">
                         {priceError
                           ? "—"
