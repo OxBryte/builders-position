@@ -1,4 +1,4 @@
-function Navbar() {
+export default function Navbar() {
   return (
     <nav className="flex items-center justify-between py-4">
       <span className="text-xl font-semibold tracking-wide">Your Logo</span>
@@ -11,5 +11,3 @@ function Navbar() {
     </nav>
   );
 }
-
-export default Navbar;
