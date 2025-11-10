@@ -56,8 +56,6 @@ export default function LeaderboardPage() {
     });
   }, [data?.users, searchTerm]);
 
-  const showPagination = !searchTerm && totalPages > 1;
-
   return (
     <section className="mt-8 space-y-10">
       <header className="space-y-2">
