@@ -24,7 +24,7 @@ export default function LeaderboardFilters({
   };
 
   const segments: Array<{
-    value: "all" | "latest" | "lastWeek";
+    value: "latest" | "lastWeek" | "all";
     label: string;
   }> = [
     { value: "latest", label: "Latest" },
