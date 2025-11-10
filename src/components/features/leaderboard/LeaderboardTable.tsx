@@ -55,12 +55,6 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
               <th scope="col" className="px-4 py-3 text-left !font-medium">
                 Builder
               </th>
-              <th
-                scope="col"
-                className="hidden px-4 py-3 text-left !font-medium sm:table-cell"
-              >
-                Summary
-              </th>
               <th scope="col" className="px-4 py-3 text-right !font-medium">
                 Score
               </th>
@@ -100,7 +94,7 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                             className="text-xs text-gray-500"
                             title={user.profile.bio}
                           >
-                            {truncateText(user.profile.bio, 100)}
+                            {truncateText(user.profile.bio, 40)}
                           </p>
                         )}
                         <div>
@@ -129,17 +123,6 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                         </div>
                       </div>
                     </div>
-                  </td>
-                  <td className="hidden max-w-xs px-4 py-3 text-gray-600 sm:table-cell">
-                    {user.summary ? (
-                      <p className="line-clamp-3 font-light text-xs leading-relaxed">
-                        {user.summary}
-                      </p>
-                    ) : (
-                      <span className="text-xs text-gray-400">
-                        No summary yet
-                      </span>
-                    )}
                   </td>
                   <td className="px-4 py-3 text-right font-semibold text-blue-600">
                     {builderScore?.points ?? 0}
