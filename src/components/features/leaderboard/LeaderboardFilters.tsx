@@ -3,8 +3,8 @@ import type { ChangeEvent } from "react";
 type LeaderboardFiltersProps = {
   sponsorSlug: string;
   onSponsorChange: (slug: string) => void;
-  timeframe: "all" | "latest" | "lastMonth";
-  onTimeframeChange: (frame: "all" | "latest" | "lastMonth") => void;
+  timeframe: "all" | "latest" | "lastWeek";
+  onTimeframeChange: (frame: "all" | "latest" | "lastWeek") => void;
   searchTerm: string;
   onSearchChange: (value: string) => void;
   resultsCount: number;
@@ -24,12 +24,12 @@ export default function LeaderboardFilters({
   };
 
   const segments: Array<{
-    value: "all" | "latest" | "lastMonth";
+    value: "all" | "latest" | "lastWeek";
     label: string;
   }> = [
     { value: "all", label: "All" },
     { value: "latest", label: "Latest" },
-    { value: "lastMonth", label: "Last Month" },
+    { value: "lastWeek", label: "Last Week" },
   ];
 
   return (
