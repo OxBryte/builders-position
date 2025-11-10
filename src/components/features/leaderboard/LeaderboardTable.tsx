@@ -94,7 +94,9 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                         alt={user.profile.display_name ?? "Builder"}
                         className="h-14 w-14 rounded-xl border border-gray-200 object-cover shadow-sm"
                       />
-                      
+                      {user.profile.bio && (
+                        <p className="text-xs text-gray-500">{user.profile.bio}</p>
+                      )}
                       <div>
                         <p className="font-medium text-gray-900">
                           {user.profile.display_name ??
