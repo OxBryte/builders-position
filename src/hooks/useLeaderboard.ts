@@ -8,6 +8,7 @@ export type LeaderboardUser = {
   reward_amount: number;
   reward_transaction_hash: string | null;
   summary: string | null;
+  tags?: string[];
   profile: {
     id: string;
     display_name: string | null;
