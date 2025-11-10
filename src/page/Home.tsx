@@ -93,7 +93,7 @@ export default function Home() {
           and restart the dev server.
         </div>
       ) : isLoading || isRefetching ? (
-        <div className="rounded-2xl border border-gray-200 bg-white/70 p-6 text-sm text-gray-600">
+        <div className="rounded-2xl border border-gray-200 bg-[var(--card-bg)] p-6 text-sm text-gray-600 shadow-sm">
           Loading profile…
         </div>
       ) : error ? (
@@ -108,11 +108,11 @@ export default function Home() {
           </button>
         </div>
       ) : !hasProfile ? (
-        <div className="rounded-2xl border border-gray-200 bg-white/70 p-6 text-center text-sm text-gray-600">
+        <div className="rounded-2xl border border-gray-200 bg-[var(--card-bg)] p-6 text-center text-sm text-gray-600 shadow-sm">
           No Talent Protocol profile found for this address yet.
         </div>
       ) : (
-        <div className="space-y-6 rounded-3xl border border-blue-100 bg-white/70 p-6 shadow-sm backdrop-blur-sm">
+        <div className="space-y-6 rounded-3xl border border-blue-100 bg-[var(--card-bg)] p-6 shadow-md backdrop-blur-sm">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
             <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border border-blue-100 bg-blue-50">
               {avatarUrl ? (
