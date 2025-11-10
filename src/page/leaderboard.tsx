@@ -62,7 +62,7 @@ export default function LeaderboardPage() {
   }, [data?.users, searchTerm]);
 
   return (
-    <section className="mt-8 space-y-6">
+    <section className="space-y-6">
       <LeaderboardFilters
         sponsorSlug={sponsorSlug}
         onSponsorChange={(slug) => {
