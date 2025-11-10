@@ -29,7 +29,7 @@ export default function LeaderboardFilters({
   }> = [
     { value: "latest", label: "Latest" },
     { value: "lastWeek", label: "Last Week" },
-    { value: "all", label: "All" },
+    { value: "all", label: "All Time" },
   ];
 
   return (
