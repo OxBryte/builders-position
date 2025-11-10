@@ -54,7 +54,7 @@ export default function LeaderboardFilters({
               type="button"
               onClick={() => onTimeframeChange(segment.value)}
               className={[
-                "rounded-[4px] px-4 py-1.5 text-sm font-medium transition",
+                "rounded-[4px] px-4 py-1.5 text-xs font-medium transition",
                 timeframe === segment.value
                   ? "bg-white text-blue-600 shadow-sm"
                   : "text-gray-500 hover:text-gray-700",
