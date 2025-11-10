@@ -1,4 +1,3 @@
-export { default } from "./home";
 import { useMemo } from "react";
 import { useAppKitAccount } from "@reown/appkit/react";
 
@@ -51,8 +50,8 @@ export default function Home() {
   const avatarUrl =
     profile?.profile_picture_url ??
     (profile?.profile_picture_data &&
-      typeof profile.profile_picture_data === "object" &&
-      "url" in profile.profile_picture_data
+    typeof profile.profile_picture_data === "object" &&
+    "url" in profile.profile_picture_data
       ? (profile.profile_picture_data as { url?: string }).url
       : undefined);
 
@@ -68,11 +67,12 @@ export default function Home() {
     0;
 
   const totalSupportVolume = asNumber(
-    profile?.stats?.total_support_volume ?? profile?.talent?.total_support_volume,
+    profile?.stats?.total_support_volume ??
+      profile?.talent?.total_support_volume
   );
 
   const talentTokenPrice = asNumber(
-    profile?.stats?.talent_token_price ?? profile?.talent?.price,
+    profile?.stats?.talent_token_price ?? profile?.talent?.price
   );
 
   const walletLabel = address ? truncateAddress(address) : "";
@@ -87,8 +87,9 @@ export default function Home() {
         </div>
       ) : !tokenAvailable ? (
         <div className="rounded-2xl border border-yellow-300 bg-yellow-50/70 p-6 text-center text-sm text-yellow-800">
-          Talent Protocol API token missing. Add <code>VITE_TALENT_API_TOKEN</code> to
-          your environment configuration and restart the dev server.
+          Talent Protocol API token missing. Add{" "}
+          <code>VITE_TALENT_API_TOKEN</code> to your environment configuration
+          and restart the dev server.
         </div>
       ) : isLoading || isRefetching ? (
         <div className="rounded-2xl border border-gray-200 bg-white/70 p-6 text-sm text-gray-600">
@@ -150,8 +151,8 @@ export default function Home() {
                 <p className="text-sm leading-relaxed text-gray-700">{bio}</p>
               ) : (
                 <p className="text-sm text-gray-500">
-                  No bio provided yet. Update your Talent Protocol profile to add more
-                  details.
+                  No bio provided yet. Update your Talent Protocol profile to
+                  add more details.
                 </p>
               )}
             </div>
@@ -171,7 +172,9 @@ export default function Home() {
                 Token Price
               </dt>
               <dd className="mt-2 text-xl font-semibold text-indigo-900">
-                {talentTokenPrice > 0 ? `$${formatNumber(talentTokenPrice)}` : "—"}
+                {talentTokenPrice > 0
+                  ? `$${formatNumber(talentTokenPrice)}`
+                  : "—"}
               </dd>
             </div>
             <div className="rounded-2xl border border-teal-100 bg-teal-50/60 p-4">
@@ -179,7 +182,9 @@ export default function Home() {
                 Support Volume
               </dt>
               <dd className="mt-2 text-xl font-semibold text-teal-900">
-                {totalSupportVolume > 0 ? formatNumber(totalSupportVolume) : "—"}
+                {totalSupportVolume > 0
+                  ? formatNumber(totalSupportVolume)
+                  : "—"}
               </dd>
             </div>
           </dl>
