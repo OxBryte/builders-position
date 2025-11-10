@@ -120,7 +120,7 @@ export default function LeaderboardPage() {
         </div>
       )}
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {isLoading ? (
           <div className="flex items-center justify-center gap-3 rounded-2xl border border-gray-200 bg-[var(--card-bg)] p-6 text-sm text-gray-600">
             <svg
@@ -160,7 +160,7 @@ export default function LeaderboardPage() {
           total={totalEntries}
           onPrev={() => setPage((prev) => Math.max(1, prev - 1))}
           onNext={() => setPage((prev) => Math.min(totalPages, prev + 1))}
-          isFetching={isFetching && !isLoading}
+          isFetching={isFetching}
         />
       </div>
     </section>
