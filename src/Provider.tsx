@@ -21,7 +21,7 @@ const metadata = {
 };
 
 // 3. Set the networks
-const networks: AppKitNetwork[] = [base, baseSepolia];
+const networks = [base, baseSepolia];
 // 4. Create Wagmi Adapter
 const wagmiAdapter = new WagmiAdapter({
   networks,
@@ -47,3 +47,4 @@ export function AppKitProvider({ children }: { children: ReactNode }) {
     </WagmiProvider>
   );
 }
+    
