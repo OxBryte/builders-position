@@ -73,10 +73,10 @@ export default function LeaderboardPage() {
               setGrantId(710);
               break;
             case "base-summer":
-              setGrantId();
+              setGrantId(undefined);
               break;
             case "base":
-              setGrantId( );
+              setGrantId(undefined);
               break;
             default:
               setGrantId(undefined);
