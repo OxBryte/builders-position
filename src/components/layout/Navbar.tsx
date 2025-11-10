@@ -7,13 +7,13 @@ export default function Navbar() {
 
   return (
     <nav className="flex items-center justify-between py-4">
-      <span className="text-xl font-semibold tracking-wide">Your Logo</span>
+      <span className="text-lg font-semibold tracking-wide">Builders Position</span>
       {isConnected ? (
         <div
           className="flex items-center gap-2 border border-gray-200 rounded-full px-4 py-2 text-sm"
           onClick={() => open()}
         >
-          <span>{truncateAddress(address)}</span>
+          <span className="text-sm">{truncateAddress(address)}</span>
         </div>
       ) : (
         <button
