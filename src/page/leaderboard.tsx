@@ -80,7 +80,7 @@ export default function LeaderboardPage() {
             }
           }}
           placeholder="Search by name, bio, summary, or rank…"
-          className="w-full rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm shadow-sm outline-none transition focus:border-blue-400 focus:ring focus:ring-blue-100"
+          className="w-full rounded-md border border-gray-200 bg-white px-4 py-2.5 text-sm outline-none transition focus:border-blue-400 focus:ring focus:ring-blue-100"
         />
         {searchTerm ? (
           <button
