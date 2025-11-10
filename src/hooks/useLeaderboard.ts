@@ -16,6 +16,7 @@ export type LeaderboardUser = {
     bio: string | null;
     image_url: string | null;
     location: string | null;
+    human_checkmark?: boolean;
     scores: Array<{
       slug: string;
       points: number;
