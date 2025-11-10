@@ -46,7 +46,7 @@ type TalentAccountsResponse =
       account?: TalentAccount;
     };
 
-const TALENT_API_URL = `${import.meta.env.VITE_API_URL}/accounts`;
+const TALENT_API_URL = `${import.meta.env.VITE_BASE_URL}/accounts`;
 
 function extractAccount(payload: TalentAccountsResponse | null): TalentAccount | null {
   if (!payload || typeof payload !== "object") {
@@ -96,7 +96,7 @@ async function fetchTalentProfile(address: string, token: string) {
 }
 
 export function useTalentProfile(address?: string) {
-  const token = import.meta.env.VITE_TALENT_API_TOKEN;
+  const token = import.meta.env.VITE_API_KEY;
   const sanitizedAddress = address?.toLowerCase();
   const enabled = Boolean(sanitizedAddress && token);
 
