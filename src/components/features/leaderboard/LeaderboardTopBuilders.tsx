@@ -39,7 +39,7 @@ export default function LeaderboardTopBuilders({
         return (
           <article
             key={user.id}
-            className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white/90 text-gray-900 transition hover:-translate-y-1 hover:shadow-md"
+            className="group relative overflow-hidden rounded-lg border border-gray-200 bg-[var(--card-bg)] text-gray-900 transition hover:-translate-y-1 hover:shadow-md"
           >
             <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/30" />
             <div className="relative flex h-full flex-col gap-6 p-6">
@@ -96,7 +96,7 @@ export default function LeaderboardTopBuilders({
               )}
 
               <dl className="flex flex-wrap items-center gap-4 text-sm">
-                <div className="rounded-2xl border border-blue-100 bg-blue-50 px-4 py-3 text-gray-900 shadow-sm">
+                <div className="rounded-2xl border border-blue-100 bg-blue-50/70 px-4 py-3 text-gray-900 shadow-sm">
                   <dt className="text-xs font-semibold uppercase tracking-wide text-blue-700">
                     Builder Score
                   </dt>
@@ -104,7 +104,7 @@ export default function LeaderboardTopBuilders({
                     {builderScore?.points ?? 0}
                   </dd>
                 </div>
-                <div className="rounded-2xl border border-amber-100 bg-amber-50 px-4 py-3 text-gray-900 shadow-sm">
+                <div className="rounded-2xl border border-amber-100 bg-amber-50/70 px-4 py-3 text-gray-900 shadow-sm">
                   <dt className="text-xs font-semibold uppercase tracking-wide text-amber-700">
                     Reward
                   </dt>
@@ -112,7 +112,7 @@ export default function LeaderboardTopBuilders({
                     {formatNumber(user.reward_amount ?? 0)}
                   </dd>
                 </div>
-                <div className="rounded-2xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 shadow-sm">
+                <div className="rounded-2xl border border-gray-200 bg-gray-50/80 px-4 py-3 text-gray-900 shadow-sm">
                   <dt className="text-xs font-semibold uppercase tracking-wide text-gray-500">
                     Movement
                   </dt>

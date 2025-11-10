@@ -1,7 +1,16 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: light;
+  --page-bg: #f5f1eb;
+  --card-bg: #fcf9f3;
+  --muted-bg: #efe8dd;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+}
+
 body {
-  font-family: 'Inter Variable', sans-serif;
-  background: #f5f1eb;
-  color: #0f172a;
+  font-family: "Inter Variable", sans-serif;
+  background: var(--page-bg);
+  color: var(--text-primary);
 }
