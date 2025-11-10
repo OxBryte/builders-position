@@ -9,7 +9,7 @@ export default function Home() {
   });
 
   return (
-    <Layout>
+    <>
       <section className="mt-8 space-y-4">
         <h1 className="text-2xl font-semibold">Leaderboard Snapshot</h1>
 
