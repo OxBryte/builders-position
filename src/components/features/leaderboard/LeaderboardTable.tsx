@@ -2,10 +2,6 @@ import { formatNumber, truncateText } from "../../lib/utils";
 import { useWctPrice } from "../../../hooks/useWctPrice";
 import type { LeaderboardUser } from "./types";
 
-type LeaderboardTableProps = {
-  users: LeaderboardUser[];
-};
-
 function getBuilderScore(user: LeaderboardUser) {
   return (
     user.profile.scores?.find((score) => score.slug === "builder_score") ??
@@ -24,11 +20,6 @@ function formatRankingChange(change: number | null | undefined) {
   return { label: `▼ ${Math.abs(change)}`, tone: "negative" as const };
 }
 
-type LeaderboardTableProps = {
-  users: LeaderboardUser[];
-  sponsorSlug?: string;
-};
-
 function getRewardSymbol(slug?: string) {
   if (!slug) return "WCT";
   if (slug.startsWith("base")) return "ETH";
@@ -36,7 +27,15 @@ function getRewardSymbol(slug?: string) {
   return "WCT";
 }
 
-export default function LeaderboardTable({ users, sponsorSlug }: LeaderboardTableProps) {
+type LeaderboardTableProps = {
+  users: LeaderboardUser[];
+  sponsorSlug?: string;
+};
+
+export default function LeaderboardTable({
+  users,
+  sponsorSlug,
+}: LeaderboardTableProps) {
   const {
     priceUsd,
     isLoading: priceLoading,
