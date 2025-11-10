@@ -105,9 +105,7 @@ export default function LeaderboardPage() {
               {filteredUsers.length}
             </span>{" "}
             result{filteredUsers.length === 1 ? "" : "s"} for{" "}
-            <span className="font-semibold text-gray-700">
-              “{searchTerm}”
-            </span>
+            <span className="font-semibold text-gray-700">“{searchTerm}”</span>
           </p>
         ) : null}
       </div>
