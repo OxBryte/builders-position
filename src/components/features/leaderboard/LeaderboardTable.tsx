@@ -1,6 +1,7 @@
 import { formatNumber, truncateText } from "../../lib/utils";
 import { useWctPrice } from "../../../hooks/useWctPrice";
 import type { LeaderboardUser } from "./types";
+import { GoCheckCircleFill } from "react-icons/go";
 
 type LeaderboardTableProps = {
   users: LeaderboardUser[];
@@ -91,7 +92,7 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                         />
                         {user.profile.human_checkmark ? (
                           <span className="absolute bottom-2 right-2 inline-flex h-3 w-3 items-center justify-center rounded-full bg-blue-500">
-                            
+                            <GoCheckCircleFill />
                           </span>
                         ) : null}
                       </div>
