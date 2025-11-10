@@ -21,7 +21,7 @@ function resolveGrantId(
   }
 
   if (sponsor === "base-summer") {
-    return timeframe === "lastWeek" ? 608 : undefined;
+    return timeframe === "lastWeek" ? 608 : 635;
   }
 
   // syndicate and others default to undefined
