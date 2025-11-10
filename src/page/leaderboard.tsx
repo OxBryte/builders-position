@@ -5,6 +5,7 @@ import LeaderboardPagination from "../components/features/leaderboard/Leaderboar
 
 export default function LeaderboardPage() {
   const [page, setPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const { data, isLoading, error, isFetching } = useLeaderboard({
     perPage: 30,
     sponsorSlug: "walletconnect",
@@ -28,15 +29,34 @@ export default function LeaderboardPage() {
     }
   }, [pagination?.current_page, page]);
 
-  const { rest } = useMemo(() => {
+  const filteredUsers = useMemo(() => {
     if (!data?.users?.length) {
-      return { rest: [] };
+      return [];
     }
 
-    return {
-      rest: data.users,
-    };
-  }, [data?.users]);
+    const term = searchTerm.trim().toLowerCase();
+
+    if (!term) {
+      return data.users;
+    }
+
+    return data.users.filter((user) => {
+      const name = user.profile.display_name ?? user.profile.name ?? "";
+      const bio = user.profile.bio ?? "";
+      const summary = user.summary ?? "";
+      const location = user.profile.location ?? "";
+
+      return (
+        name.toLowerCase().includes(term) ||
+        bio.toLowerCase().includes(term) ||
+        summary.toLowerCase().includes(term) ||
+        location.toLowerCase().includes(term) ||
+        user.leaderboard_position.toString().includes(term)
+      );
+    });
+  }, [data?.users, searchTerm]);
+
+  const showPagination = !searchTerm && totalPages > 1;
 
   return (
     <section className="mt-8 space-y-10">
@@ -91,15 +111,60 @@ export default function LeaderboardPage() {
 
       {!isLoading && !error && data?.users?.length ? (
         <>
-          <LeaderboardTable users={rest} />
-          <LeaderboardPagination
-            currentPage={pagination?.current_page ?? page}
-            lastPage={totalPages}
-            total={totalEntries}
-            onPrev={() => setPage((prev) => Math.max(1, prev - 1))}
-            onNext={() => setPage((prev) => Math.min(totalPages, prev + 1))}
-            isFetching={isFetching && !isLoading}
-          />
+          <div className="rounded-3xl border border-gray-200 bg-[var(--card-bg)] p-4 shadow-sm">
+            <label className="block text-sm font-medium text-gray-600">
+              Search builders
+            </label>
+            <div className="mt-2 flex items-center gap-2">
+              <input
+                type="search"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                placeholder="Search by name, bio, summary, or rank…"
+                className="w-full rounded-full border border-gray-300 bg-white px-4 py-2 text-sm shadow-sm outline-none transition focus:border-blue-400 focus:ring focus:ring-blue-100"
+              />
+              {searchTerm ? (
+                <button
+                  type="button"
+                  onClick={() => setSearchTerm("")}
+                  className="rounded-full border border-gray-200 px-3 py-2 text-xs font-medium text-gray-500 transition hover:border-gray-300 hover:text-gray-700"
+                >
+                  Clear
+                </button>
+              ) : null}
+            </div>
+            {searchTerm ? (
+              <p className="mt-2 text-xs text-gray-500">
+                Showing{" "}
+                <span className="font-semibold text-gray-700">
+                  {filteredUsers.length}
+                </span>{" "}
+                result{filteredUsers.length === 1 ? "" : "s"} for{" "}
+                <span className="font-semibold text-gray-700">
+                  “{searchTerm}”
+                </span>
+              </p>
+            ) : null}
+          </div>
+
+          {filteredUsers.length ? (
+            <LeaderboardTable users={filteredUsers} />
+          ) : (
+            <div className="rounded-3xl border border-gray-200 bg-[var(--card-bg)] p-6 text-center text-sm text-gray-500 shadow-sm">
+              No builders matched your search.
+            </div>
+          )}
+
+          {showPagination ? (
+            <LeaderboardPagination
+              currentPage={pagination?.current_page ?? page}
+              lastPage={totalPages}
+              total={totalEntries}
+              onPrev={() => setPage((prev) => Math.max(1, prev - 1))}
+              onNext={() => setPage((prev) => Math.min(totalPages, prev + 1))}
+              isFetching={isFetching && !isLoading}
+            />
+          ) : null}
         </>
       ) : null}
     </section>
