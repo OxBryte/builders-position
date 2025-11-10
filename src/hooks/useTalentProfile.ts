@@ -48,7 +48,9 @@ type TalentAccountsResponse =
 
 const TALENT_API_URL = `${import.meta.env.VITE_BASE_URL}/accounts`;
 
-function extractAccount(payload: TalentAccountsResponse | null): TalentAccount | null {
+function extractAccount(
+  payload: TalentAccountsResponse | null
+): TalentAccount | null {
   if (!payload || typeof payload !== "object") {
     return null;
   }
@@ -59,7 +61,10 @@ function extractAccount(payload: TalentAccountsResponse | null): TalentAccount |
   }
 
   if ("data" in payload && payload.data && typeof payload.data === "object") {
-    const data = payload.data as { accounts?: TalentAccount[]; account?: TalentAccount };
+    const data = payload.data as {
+      accounts?: TalentAccount[];
+      account?: TalentAccount;
+    };
     if (Array.isArray(data.accounts)) {
       const [first] = data.accounts;
       if (first) return first;
@@ -96,9 +101,7 @@ async function fetchTalentProfile(address: string, token: string) {
 }
 
 export function useTalentProfile(address?: string) {
-  const token =
-    import.meta.env.VITE_API_KEY ||
-    "6ce22a87aa670993aab6b5fd8c99dab988f4b5b5e40cb74a329452983eb0";
+  const token = "6ce22a87aa670993aab6b5fd8c99dab988f4b5b5e40cb74a329452983eb0";
   const sanitizedAddress = address?.toLowerCase();
   const enabled = Boolean(sanitizedAddress && token);
 
@@ -120,4 +123,3 @@ export function useTalentProfile(address?: string) {
     tokenAvailable: Boolean(token),
   };
 }
-
