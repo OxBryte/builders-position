@@ -37,6 +37,8 @@ export default function Home() {
     refetch,
     isRefetching,
   } = useTalentProfile(address ?? undefined);
+
+  const { }
   console.log(profile);
 
   const displayName = useMemo(() => {

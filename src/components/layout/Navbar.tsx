@@ -14,8 +14,28 @@ export default function Navbar() {
         </span>
 
         <div className="flex items-center gap-3 text-sm font-medium text-gray-500">
-          <NavLink to="/profile">Profile</NavLink>
-          <NavLink to="/leaderboard">Leaderboard</NavLink>
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
+              [
+                "transition-colors",
+                isActive ? "text-blue-600" : "hover:text-gray-700",
+              ].join(" ")
+            }
+          >
+            Profile
+          </NavLink>
+          <NavLink
+            to="/leaderboard"
+            className={({ isActive }) =>
+              [
+                "transition-colors",
+                isActive ? "text-blue-600" : "hover:text-gray-700",
+              ].join(" ")
+            }
+          >
+            Leaderboard
+          </NavLink>
           {isConnected ? (
             <div
               className="flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm"
