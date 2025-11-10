@@ -8,7 +8,7 @@ export default function LeaderboardPage() {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [sponsorSlug, setSponsorSlug] = useState("walletconnect");
-  const [grantId, setGrantId] = useState<number | undefined>(710);
+  const [grantId, setGrantId] = useState<number | undefined>(undefined);
   const [timeframe, setTimeframe] = useState<"all" | "week" | "month">("all");
 
   const { data, isLoading, error, isFetching } = useLeaderboard({
