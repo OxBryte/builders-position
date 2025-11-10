@@ -1,3 +1,4 @@
+export { default } from "./home";
 import { useMemo } from "react";
 import { useAppKitAccount } from "@reown/appkit/react";
 
