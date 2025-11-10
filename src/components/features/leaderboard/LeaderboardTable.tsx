@@ -110,7 +110,7 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-center text-xs font-semibold">
+                  <td className="px-4 py-3 text-center font-medium text-xs">
                     {change.label !== "—" ? (
                       <span
                         className={
