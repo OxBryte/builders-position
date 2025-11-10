@@ -6,14 +6,16 @@ import LeaderboardPagination from "../components/features/leaderboard/Leaderboar
 export default function LeaderboardPage() {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
+  const [sponsorSlug, setSponsorSlug] = useState("walletconnect");
+  const [grantId, setGrantId] = useState<number | undefined>(710);
+  const [timeframe, setTimeframe] = useState<"all" | "week" | "month">("all");
+
   const { data, isLoading, error, isFetching } = useLeaderboard({
     perPage: searchTerm ? 200 : 30,
-    sponsorSlug: "walletconnect",
-    grantId: 710,
+    sponsorSlug,
+    grantId,
     page: searchTerm ? 1 : page,
   });
-
-  console.log("data", data);
 
   const pagination = data?.pagination;
   const totalPages = pagination?.last_page ?? 1;
