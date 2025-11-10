@@ -5,6 +5,7 @@ type LeaderboardPaginationProps = {
   isFetching?: boolean;
   onPrev: () => void;
   onNext: () => void;
+  forceVisible?: boolean;
 };
 
 export default function LeaderboardPagination({
@@ -14,8 +15,9 @@ export default function LeaderboardPagination({
   isFetching,
   onPrev,
   onNext,
+  forceVisible = false,
 }: LeaderboardPaginationProps) {
-  if (lastPage <= 1) {
+  if (!forceVisible && lastPage <= 1) {
     return null;
   }
 

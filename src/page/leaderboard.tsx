@@ -161,6 +161,7 @@ export default function LeaderboardPage() {
           onPrev={() => setPage((prev) => Math.max(1, prev - 1))}
           onNext={() => setPage((prev) => Math.min(totalPages, prev + 1))}
           isFetching={isFetching}
+          forceVisible={isLoading || Boolean(searchTerm)}
         />
       </div>
     </section>
