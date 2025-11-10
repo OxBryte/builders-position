@@ -7,6 +7,8 @@ export default function LeaderboardPage() {
     grantId: 710,
   });
 
+  console.log(data);
+
   return (
     <section className="mt-8 space-y-4">
       <h1 className="text-2xl font-semibold">Leaderboard Snapshot</h1>
