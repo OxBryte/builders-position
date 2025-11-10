@@ -45,7 +45,7 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
           {users.length} builders
         </p>
       </header>
-      <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm ring-1 ring-black/5">
+      <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
         <table className="min-w-full divide-y divide-gray-100 text-sm">
           <thead className="bg-gray-50 text-xs uppercase tracking-wide text-gray-500">
             <tr>
