@@ -1,6 +1,5 @@
 export default function Navbar() {
-
-  const {open} = 
+  // const { open } = useAppKit();
 
   return (
     <nav className="flex items-center justify-between py-4">
