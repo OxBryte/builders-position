@@ -113,7 +113,7 @@ export function useLeaderboard(options: UseLeaderboardOptions = {}) {
   );
 
   const query = useQuery<LeaderboardResponse, Error>({
-    queryKey: ["leaderboard", queryParams],
+    queryKey: ["leaderboard", BASE_URL, queryParams],
     queryFn: () => fetchLeaderboard(queryParams),
     enabled,
     staleTime: 60_000,
