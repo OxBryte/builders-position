@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLeaderboard } from "../hooks/useLeaderboard";
-import LeaderboardTopBuilders from "../components/features/leaderboard/LeaderboardTopBuilders";
 import LeaderboardTable from "../components/features/leaderboard/LeaderboardTable";
 import LeaderboardPagination from "../components/features/leaderboard/LeaderboardPagination";
 
@@ -29,13 +28,12 @@ export default function LeaderboardPage() {
     }
   }, [pagination?.current_page, page]);
 
-  const { highlights, rest } = useMemo(() => {
+  const { rest } = useMemo(() => {
     if (!data?.users?.length) {
-      return { highlights: [], rest: [] };
+      return { rest: [] };
     }
 
     return {
-      highlights: data.users.slice(0, 3),
       rest: data.users,
     };
   }, [data?.users]);
@@ -93,7 +91,6 @@ export default function LeaderboardPage() {
 
       {!isLoading && !error && data?.users?.length ? (
         <>
-          {/* <LeaderboardTopBuilders users={highlights} /> */}
           <LeaderboardTable users={rest} />
           <LeaderboardPagination
             currentPage={pagination?.current_page ?? page}
