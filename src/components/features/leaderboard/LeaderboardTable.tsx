@@ -92,7 +92,7 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                         />
                         {user.profile.human_checkmark ? (
                           <span className="absolute bottom-2 right-2 inline-flex items-center justify-center rounded-full">
-                            <GoCheckCircleFill className="text-blue-500 bg-white rounded-full" size={18} />
+                            <GoCheckCircleFill className="text-blue-500 bg-white rounded-full" size={16} />
                           </span>
                         ) : null}
                       </div>
