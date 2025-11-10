@@ -36,7 +36,7 @@ export default function LeaderboardPage() {
     "all"
   );
   const [grantId, setGrantId] = useState<number | undefined>(() =>
-    resolveGrantId("walletconnect", "all")
+    resolveGrantId("walletconnect", "latest")
   );
 
   const { data, isLoading, error, isFetching } = useLeaderboard({
