@@ -1,4 +1,3 @@
-import Layout from "../components/layout/Layout";
 import { useLeaderboard } from "../hooks/useLeaderboard";
 
 export default function Home() {
@@ -49,6 +48,6 @@ export default function Home() {
           </div>
         )}
       </section>
-    </Layout>
+    </>
   );
 }
