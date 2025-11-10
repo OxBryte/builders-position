@@ -46,15 +46,15 @@ const BASE_URL = "https://www.builderscore.xyz/api/leaderboards";
 type NormalizedOptions = Required<
   Pick<UseLeaderboardOptions, "perPage" | "page"> & {
     sponsorSlug?: string;
-    grantId?: string | number;
+    grantId?: number;
   }
 >;
 
 function buildQuery({
   perPage = 50,
   page = 1,
-  sponsorSlug,
-  grantId,
+  sponsorSlug = "walletconnect",
+  grantId = 710,
 }: NormalizedOptions) {
   const params = new URLSearchParams();
   params.set("per_page", String(perPage));
