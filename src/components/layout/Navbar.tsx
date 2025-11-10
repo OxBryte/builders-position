@@ -1,4 +1,7 @@
 export default function Navbar() {
+
+  const {open} = 
+
   return (
     <nav className="flex items-center justify-between py-4">
       <span className="text-xl font-semibold tracking-wide">Your Logo</span>
