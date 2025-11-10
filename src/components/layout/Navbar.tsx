@@ -8,8 +8,8 @@ export default function Navbar() {
 
   return (
     <div className="bg-white border border-gray-200">
-      <nav className="flex items-center justify-between gap-6 py-4 mx-auto w-full max-w-[920px]">
-        <span className="text-lg font-semibold tracking-wide">
+      <nav className="flex items-center justify-between gap-6 py-4 mx-auto w-full max-w-[920px] px-6">
+        <span className="text-lg font-semibold tracking-wide text-gray-900">
           Builders Position
         </span>
 
