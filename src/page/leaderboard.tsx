@@ -156,16 +156,14 @@ export default function LeaderboardPage() {
           </div>
         )}
 
-        {showPagination ? (
-          <LeaderboardPagination
-            currentPage={pagination?.current_page ?? page}
-            lastPage={totalPages}
-            total={totalEntries}
-            onPrev={() => setPage((prev) => Math.max(1, prev - 1))}
-            onNext={() => setPage((prev) => Math.min(totalPages, prev + 1))}
-            isFetching={isFetching && !isLoading}
-          />
-        ) : null}
+        <LeaderboardPagination
+          currentPage={pagination?.current_page ?? page}
+          lastPage={totalPages}
+          total={totalEntries}
+          onPrev={() => setPage((prev) => Math.max(1, prev - 1))}
+          onNext={() => setPage((prev) => Math.min(totalPages, prev + 1))}
+          isFetching={isFetching && !isLoading}
+        />
       </div>
     </section>
   );
