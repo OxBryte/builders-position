@@ -24,13 +24,13 @@ export default function LeaderboardPagination({
   return (
     <footer className="flex flex-col items-center justify-between gap-4 rounded-lg border border-gray-200 bg-white p-4 sm:flex-row sm:gap-6">
       <div className="text-sm text-gray-500">
-        Page{" "}
-        <span className="font-semibold text-gray-900">{currentPage}</span> of{" "}
-        <span className="font-semibold text-gray-900">{lastPage}</span>
+        Page <span className="font-semibold text-gray-900">{currentPage}</span>{" "}
+        of <span className="font-semibold text-gray-900">{lastPage}</span>
         {typeof total === "number" ? (
           <>
             {" "}
-            • <span className="font-medium text-gray-900">{total}</span> builders
+            • <span className="font-medium text-gray-900">{total}</span>{" "}
+            builders
           </>
         ) : null}
         {isFetching ? (
@@ -60,4 +60,3 @@ export default function LeaderboardPagination({
     </footer>
   );
 }
-
