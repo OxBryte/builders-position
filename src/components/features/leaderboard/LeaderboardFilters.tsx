@@ -30,10 +30,13 @@ export default function LeaderboardFilters({
   ];
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col gap-3 border border-gray-200 bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+    <div className="space-y-4 mt-3">
+      <div className="flex flex-col  gap-3 border border-gray-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-2">
-          <label htmlFor="sponsor-filter" className="text-sm font-medium text-gray-600">
+          <label
+            htmlFor="sponsor-filter"
+            className="text-sm font-medium text-gray-600"
+          >
             Filter by sponsor
           </label>
           <select
@@ -90,4 +93,3 @@ export default function LeaderboardFilters({
     </div>
   );
 }
-
