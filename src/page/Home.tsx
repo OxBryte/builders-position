@@ -67,13 +67,13 @@ export default function Home() {
     profile?.total_supporters ??
     0;
 
-  const totalSupportVolume =
-    asNumber(profile?.stats?.total_support_volume) ??
-    asNumber(profile?.talent?.total_support_volume);
+  const totalSupportVolume = asNumber(
+    profile?.stats?.total_support_volume ?? profile?.talent?.total_support_volume,
+  );
 
-  const talentTokenPrice =
-    asNumber(profile?.stats?.talent_token_price) ??
-    asNumber(profile?.talent?.price);
+  const talentTokenPrice = asNumber(
+    profile?.stats?.talent_token_price ?? profile?.talent?.price,
+  );
 
   const walletLabel = address ? truncateAddress(address) : "";
 
