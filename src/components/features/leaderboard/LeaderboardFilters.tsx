@@ -40,7 +40,7 @@ export default function LeaderboardFilters({
         >
           <option value="walletconnect">WalletConnect</option>
           <option value="base-summer">Base (Summer)</option>
-          <option value="base-spring">Base (Spring)</option>
+          <option value="base">Base (Spring)</option>
           <option value="syndicate">Syndicate</option>
         </select>
 
