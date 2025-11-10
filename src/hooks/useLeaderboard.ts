@@ -62,7 +62,7 @@ function buildQuery({
   perPage = 50,
   page = 1,
   sponsorSlug = "walletconnect",
-  grantId = 710,
+  grantId = undefined,
 }: NormalizedOptions) {
   const params = new URLSearchParams();
   params.set("per_page", String(perPage));
