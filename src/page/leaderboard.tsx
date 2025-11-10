@@ -6,7 +6,7 @@ import LeaderboardFilters from "../components/features/leaderboard/LeaderboardFi
 
 function resolveGrantId(
   sponsor: string,
-  timeframe: "all" | "latest" | "lastMonth",
+  timeframe: "all" | "latest" | "lastMonth"
 ): number | undefined {
   if (timeframe === "all") {
     return undefined;
@@ -33,10 +33,10 @@ export default function LeaderboardPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sponsorSlug, setSponsorSlug] = useState("walletconnect");
   const [timeframe, setTimeframe] = useState<"all" | "latest" | "lastMonth">(
-    "all",
+    "all"
   );
   const [grantId, setGrantId] = useState<number | undefined>(() =>
-    resolveGrantId("walletconnect", "all"),
+    resolveGrantId("walletconnect", "all")
   );
 
   const { data, isLoading, error, isFetching } = useLeaderboard({

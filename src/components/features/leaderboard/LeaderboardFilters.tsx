@@ -23,9 +23,10 @@ export default function LeaderboardFilters({
     onSponsorChange(event.target.value);
   };
 
-  const segments: Array<
-    { value: "all" | "latest" | "lastMonth"; label: string }
-  > = [
+  const segments: Array<{
+    value: "all" | "latest" | "lastMonth";
+    label: string;
+  }> = [
     { value: "all", label: "All" },
     { value: "latest", label: "Latest" },
     { value: "lastMonth", label: "Last Month" },
