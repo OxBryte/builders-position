@@ -68,7 +68,7 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
               return (
                 <tr
                   key={user.id}
-                  className="transition hover:bg-gray-50/80 hover:shadow-sm"
+                  className="transition hover:bg-gray-50/80 cursor-pointer"
                 >
                   <td className="px-4 py-3 font-semibold text-gray-700">
                     #{user.leaderboard_position}
