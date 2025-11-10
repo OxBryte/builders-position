@@ -87,7 +87,7 @@ async function fetchTalentProfile(address: string, token: string) {
 
   const response = await fetch(url.toString(), {
     headers: {
-      Authorization: `Bearer ${token}`,
+      "x-api-key": token,
       Accept: "application/json",
     },
   });
@@ -101,7 +101,7 @@ async function fetchTalentProfile(address: string, token: string) {
 }
 
 export function useTalentProfile(address?: string) {
-  const token = "6ce22a87aa670993aab6b5fd8c99dab988f4b5b5e40cb74a329452983eb0";
+  const token = import.meta.env.VITE_API_KEY;
   const sanitizedAddress = address?.toLowerCase();
   const enabled = Boolean(sanitizedAddress && token);
 
