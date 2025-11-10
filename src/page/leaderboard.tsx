@@ -1,14 +1,33 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLeaderboard } from "../hooks/useLeaderboard";
 import LeaderboardTopBuilders from "../components/features/leaderboard/LeaderboardTopBuilders";
 import LeaderboardTable from "../components/features/leaderboard/LeaderboardTable";
+import LeaderboardPagination from "../components/features/leaderboard/LeaderboardPagination";
 
 export default function LeaderboardPage() {
+  const [page, setPage] = useState(1);
   const { data, isLoading, error } = useLeaderboard({
     perPage: 10,
     sponsorSlug: "walletconnect",
     grantId: 710,
+    page,
   });
+
+  const pagination = data?.pagination;
+  const totalPages = pagination?.last_page ?? 1;
+  const totalEntries = pagination?.total ?? 0;
+
+  useEffect(() => {
+    if (pagination?.last_page && page > pagination.last_page) {
+      setPage(pagination.last_page);
+    }
+  }, [pagination?.last_page, page]);
+
+  useEffect(() => {
+    if (pagination?.current_page && pagination.current_page !== page) {
+      setPage(pagination.current_page);
+    }
+  }, [pagination?.current_page, page]);
 
   const { highlights, rest } = useMemo(() => {
     if (!data?.users?.length) {
@@ -55,6 +74,14 @@ export default function LeaderboardPage() {
         <>
           <LeaderboardTopBuilders users={highlights} />
           <LeaderboardTable users={rest} />
+          <LeaderboardPagination
+            currentPage={pagination?.current_page ?? page}
+            lastPage={totalPages}
+            total={totalEntries}
+            onPrev={() => setPage((prev) => Math.max(1, prev - 1))}
+            onNext={() => setPage((prev) => Math.min(totalPages, prev + 1))}
+            isLoading={isLoading}
+          />
         </>
       ) : null}
     </section>

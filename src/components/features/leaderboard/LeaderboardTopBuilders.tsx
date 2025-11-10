@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { formatNumber } from "../../lib/utils";
 import type { LeaderboardUser } from "./types";
 
