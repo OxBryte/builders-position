@@ -40,7 +40,7 @@ export default function LeaderboardTopBuilders({
         return (
           <article
             key={user.id}
-            className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white/90 text-gray-900 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white/90 text-gray-900 transition hover:-translate-y-1 hover:shadow-md"
           >
             <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/30" />
             <div className="relative flex h-full flex-col gap-6 p-6">
