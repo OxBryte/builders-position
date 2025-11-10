@@ -11,6 +11,8 @@
     "auto-commit": "node scripts/auto-commit.js"
   },
   "dependencies": {
+    "@reown/appkit": "^1.8.13",
+    "@reown/appkit-adapter-wagmi": "^1.8.13",
     "@tailwindcss/vite": "^4.1.17",
     "@tanstack/react-query": "^5.90.7",
     "@tanstack/react-query-devtools": "^5.90.2",
@@ -18,7 +20,9 @@
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.9.5",
-    "tailwindcss": "^4.1.17"
+    "tailwindcss": "^4.1.17",
+    "viem": "^2.38.6",
+    "wagmi": "^2.19.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

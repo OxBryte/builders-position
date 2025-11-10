@@ -12,14 +12,7 @@ function App() {
             
           }
         />
-        <Route
-          path="/about"
-          element={
-            <Layout>
-              <h1>About</h1>
-            </Layout>
-          }
-        />
+        
       </Routes>
     </BrowserRouter>
   );
