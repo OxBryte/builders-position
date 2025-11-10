@@ -47,7 +47,7 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
       </header>
       <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
         <table className="min-w-full divide-y divide-gray-100 text-sm">
-          <thead className="bg-gray-50 text-xs uppercase tracking-wide text-gray-500">
+          <thead className="bg-gray-50 text-xs uppercase tracking-wide !font-medium text-gray-500">
             <tr>
               <th scope="col" className="px-4 py-3 text-left">
                 Rank
