@@ -43,12 +43,12 @@ export type UseLeaderboardOptions = {
 
 const BASE_URL = "https://www.builderscore.xyz/api/leaderboards";
 
-type NormalizedOptions = Required<
-  Pick<UseLeaderboardOptions, "perPage" | "page"> & {
-    sponsorSlug?: string;
-    grantId?: string | number;
-  }
->;
+type NormalizedOptions = {
+  perPage: number;
+  page: number;
+  sponsorSlug: string;
+  grantId: string | number;
+};
 
 function buildQuery({
   perPage = 50,
@@ -87,8 +87,8 @@ export function useLeaderboard(options: UseLeaderboardOptions = {}) {
     enabled = true,
     perPage = 50,
     page = 1,
-    sponsorSlug,
-    grantId,
+    sponsorSlug = "walletconnect",
+    grantId = 710,
   } = options;
 
   const queryParams = useMemo<NormalizedOptions>(
