@@ -4,17 +4,17 @@ import "./index.css";
 import App from "./App.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { AppKitProvider } from "@reown/appkit";
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AppKitProvider>
-
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools />
-      <App />
-    </QueryClientProvider>
+    <AppKitProvider projectId={import.meta.env.VITE_PROJECT_ID} network>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools />
+        <App />
+      </QueryClientProvider>
     </AppKitProvider>
   </StrictMode>
 );
