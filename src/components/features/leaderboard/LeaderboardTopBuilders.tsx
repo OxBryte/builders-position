@@ -40,7 +40,7 @@ export default function LeaderboardTopBuilders({
         return (
           <article
             key={user.id}
-            className="group relative overflow-hidden rounded-3xl border border-gray-200 bg-white/90 text-gray-900 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+            className="group relative overflow-hidden rounded-lg border border-gray-200 bg-white/90 text-gray-900 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
           >
             <div className="pointer-events-none absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/30" />
             <div className="relative flex h-full flex-col gap-6 p-6">
@@ -142,16 +142,6 @@ export default function LeaderboardTopBuilders({
                     </span>
                   ))}
                 </footer>
-              ) : null}
-
-              {user.summary ? (
-                <div className="rounded-2xl border border-gray-200 bg-gray-50/60 p-4 text-xs leading-relaxed text-gray-600 shadow-inner">
-                  {user.summary.split("\n\n").map((paragraph) => (
-                    <Fragment key={paragraph.slice(0, 16)}>
-                      <p className="mb-3 last:mb-0">{paragraph}</p>
-                    </Fragment>
-                  ))}
-                </div>
               ) : null}
             </div>
           </article>
