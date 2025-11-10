@@ -11,6 +11,7 @@
     "auto-commit": "node scripts/auto-commit.js"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.2.8",
     "@reown/appkit": "^1.8.13",
     "@reown/appkit-adapter-wagmi": "^1.8.13",
     "@tailwindcss/vite": "^4.1.17",
