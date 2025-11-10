@@ -109,7 +109,7 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                   </td>
                   <td className="hidden max-w-xs px-4 py-3 text-gray-600 sm:table-cell">
                     {user.summary ? (
-                      <p className="line-clamp-3 text-xs leading-relaxed">
+                      <p className="line-clamp-3 font-light text-xs leading-relaxed">
                         {user.summary}
                       </p>
                     ) : (
