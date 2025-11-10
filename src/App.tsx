@@ -9,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/"
+          path="/leaderboard"
           element={
             <Layout>
               <LeaderboardPage />
@@ -17,7 +17,7 @@ function App() {
           }
         />
         <Route
-          path="/profile"
+          path="/"
           element={
             <Layout>
               <Home />
