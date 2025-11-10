@@ -1,7 +1,7 @@
 import { createAppKit } from "@reown/appkit/react";
 
 import { WagmiProvider } from "wagmi";
-import { arbitrum, mainnet } from "@reown/appkit/networks";
+import { base, baseSepolia } from "@reown/appkit/networks";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiAdapter } from "@reown/appkit-adapter-wagmi";
 import type { ReactNode } from "react";
@@ -10,7 +10,7 @@ import type { ReactNode } from "react";
 const queryClient = new QueryClient();
 
 // 1. Get projectId from https://dashboard.reown.com
-const projectId = "YOUR_PROJECT_ID";
+const projectId = import.meta.env.VITE_PROJECT_ID;
 
 // 2. Create a metadata object - optional
 const metadata = {
@@ -21,8 +21,7 @@ const metadata = {
 };
 
 // 3. Set the networks
-const networks = [mainnet, arbitrum];
-
+const networks: AppKitNetwork[] = [base, baseSepolia];
 // 4. Create Wagmi Adapter
 const wagmiAdapter = new WagmiAdapter({
   networks,
@@ -48,4 +47,3 @@ export function AppKitProvider({ children }: { children: ReactNode }) {
     </WagmiProvider>
   );
 }
-    
