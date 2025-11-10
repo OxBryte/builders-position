@@ -8,8 +8,8 @@ type LayoutProps = {
 function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-[var(--page-bg)] pb-10">
-      <div className="mx-auto w-full max-w-[920px] px-6">
         <Navbar />
+      <div className="mx-auto w-full max-w-[920px] px-6">
         {children}
       </div>
     </div>
