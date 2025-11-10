@@ -47,14 +47,14 @@ export default function LeaderboardFilters({
           <option value="syndicate">Syndicate</option>
         </select>
 
-        <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 p-1">
+        <div className="flex items-center gap-2 rounded-[8px] bg-gray-50 p-1">
           {segments.map((segment) => (
             <button
               key={segment.value}
               type="button"
               onClick={() => onTimeframeChange(segment.value)}
               className={[
-                "rounded-[full] px-4 py-1.5 text-sm font-medium transition",
+                "rounded-[4px] px-4 py-1.5 text-sm font-medium transition",
                 timeframe === segment.value
                   ? "bg-white text-blue-600 shadow-sm"
                   : "text-gray-500 hover:text-gray-700",
