@@ -1,4 +1,4 @@
-import { formatNumber } from "../../lib/utils";
+import { formatNumber, truncateText } from "../../lib/utils";
 import { useWctPrice } from "../../../hooks/useWctPrice";
 import type { LeaderboardUser } from "./types";
 
@@ -96,11 +96,8 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                       />
                       <div className="flex flex-col gap-1">
                         {user.profile.bio && (
-                          <p
-                            className="text-xs text-gray-500 line-clamp-1"
-                            title={user.profile.bio}
-                          >
-                            {user.profile.bio}
+                          <p className="text-xs text-gray-500" title={user.profile.bio}>
+                            {truncateText(user.profile.bio, 80)}
                           </p>
                         )}
                         <div>

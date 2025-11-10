@@ -18,6 +18,21 @@ export function truncateAddress(
   return `${start}…${end}`;
 }
 
+export function truncateText(
+  text: string | null | undefined,
+  maxLength: number = 120,
+) {
+  if (!text) {
+    return "";
+  }
+
+  if (text.length <= maxLength) {
+    return text;
+  }
+
+  return `${text.slice(0, maxLength - 1)}…`;
+}
+
 const numberFormatter = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 0,
   maximumFractionDigits: 2,
