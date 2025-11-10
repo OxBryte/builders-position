@@ -1,16 +1,16 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 type LayoutProps = {
   children: ReactNode;
 };
 
-const outerStyle: React.CSSProperties = {
+const outerStyle: CSSProperties = {
   minHeight: "100vh",
   display: "flex",
   justifyContent: "center",
 };
 
-const innerStyle: React.CSSProperties = {
+const innerStyle: CSSProperties = {
   width: "100%",
   maxWidth: "960px",
   padding: "0 24px",
