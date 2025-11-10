@@ -2,9 +2,9 @@
 
 :root {
   color-scheme: light;
-  --page-bg: #f5f1eb;
-  --card-bg: #fcf9f3;
-  --muted-bg: #efe8dd;
+  --page-bg: #f9fafb;
+  --card-bg: #ffffff;
+  --muted-bg: #f3f4f6;
   --text-primary: #0f172a;
   --text-secondary: #475569;
 }
