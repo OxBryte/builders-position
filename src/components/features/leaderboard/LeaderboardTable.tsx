@@ -49,22 +49,22 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
         <table className="min-w-full divide-y divide-gray-100 text-sm">
           <thead className="bg-gray-50 text-xs uppercase tracking-wide !font-medium text-gray-500">
             <tr>
-              <th scope="col" className="px-4 py-3 text-left">
+              <th scope="col" className="px-4 py-3 text-left !font-medium">
                 Rank
               </th>
-              <th scope="col" className="px-4 py-3 text-left">
+              <th scope="col" className="px-4 py-3 text-left !font-medium">
                 Builder
               </th>
               <th
                 scope="col"
-                className="hidden px-4 py-3 text-left sm:table-cell"
+                className="hidden px-4 py-3 text-left !font-medium sm:table-cell"
               >
                 Summary
               </th>
-              <th scope="col" className="px-4 py-3 text-right">
+              <th scope="col" className="px-4 py-3 text-right !font-medium">
                 Score
               </th>
-              <th scope="col" className="px-4 py-3 text-right">
+              <th scope="col" className="px-4 py-3 text-right !font-medium">
                 Reward
               </th>
             </tr>
