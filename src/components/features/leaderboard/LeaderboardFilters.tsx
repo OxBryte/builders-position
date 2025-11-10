@@ -39,8 +39,8 @@ export default function LeaderboardFilters({
           className="rounded-md border border-gray-200 bg-white px-3 py-2 text-sm outline-none transition focus:border-blue-400 focus:ring focus:ring-blue-100"
         >
           <option value="walletconnect">WalletConnect</option>
-          <option value="base-summer">Base (Summer)</option>
-          <option value="base">Base (Spring)</option>
+          <option value="base-summer">Base (Summer League)</option>
+          <option value="base">Base (Spring League)</option>
           <option value="syndicate">Syndicate</option>
         </select>
 
