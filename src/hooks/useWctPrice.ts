@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 const COINGECKO_ENDPOINT =
-  "https://api.coingecko.com/api/v3/simple/price?ids=walletconnect-token&vs_currencies=usd";
-"https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=bitcoin&names=Bitcoin&symbols=btc";
+  "https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=walletconnect-token&names=WalletConnect&symbols=wct";
 type CoingeckoResponse = {
   "walletconnect-token"?: {
     usd?: number;
