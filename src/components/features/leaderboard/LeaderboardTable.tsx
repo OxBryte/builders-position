@@ -95,7 +95,9 @@ export default function LeaderboardTable({ users }: LeaderboardTableProps) {
                         className="h-14 w-14 rounded-xl border border-gray-200 object-cover shadow-sm"
                       />
                       {user.profile.bio && (
-                        <p className="text-xs text-gray-500">{user.profile.bio}</p>
+                        <p className="text-xs text-gray-500 line-clamp-1" title={user.profile.bio}>
+                          {user.profile.bio}
+                        </p>
                       )}
                       <div>
                         <p className="font-medium text-gray-900">
