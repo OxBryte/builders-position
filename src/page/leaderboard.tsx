@@ -72,7 +72,7 @@ export default function LeaderboardPage() {
 
       {!isLoading && !error && data?.users?.length ? (
         <>
-          <LeaderboardTopBuilders users={highlights} />
+          {/* <LeaderboardTopBuilders users={highlights} /> */}
           <LeaderboardTable users={rest} />
           <LeaderboardPagination
             currentPage={pagination?.current_page ?? page}
