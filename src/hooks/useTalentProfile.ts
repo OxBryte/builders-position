@@ -81,7 +81,7 @@ const fetchTalentProfile = async (
   }
 
   const payload = (await response.json()) as TalentProfileResponse;
-  console.log(payload, 'here');
+  // console.log(payload?.profile, 'here');
   return payload?.profile ?? null;
 };
 
