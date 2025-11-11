@@ -122,7 +122,7 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
           </span>
         )}
         {isVerified ? (
-          <span className="absolute -bottom-1 -right-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white shadow ring-2 ring-white">
+          <span className="absolute -bottom-1 -right-1 inline-flex h-6 w-6 z-1 items-center justify-center rounded-full bg-blue-600 text-white shadow ring-2 ring-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
