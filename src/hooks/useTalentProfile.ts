@@ -53,7 +53,6 @@ const getProfileUrl = () => {
   return `${BASE_URL}${PROFILE_ENDPOINT}`;
 };
 
-
 const fetchTalentProfile = async (
   address: string,
   token: string
