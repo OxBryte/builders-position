@@ -46,7 +46,7 @@ type TalentAccountsResponse =
       account?: TalentAccount;
     };
 
-const TALENT_API_URL = `${import.meta.env.VITE_BASE_URL}/accounts`;
+const TALENT_API_URL = `${import.meta.env.VITE_BASE_URL}/profile`;
 
 function extractAccount(
   payload: TalentAccountsResponse | null
