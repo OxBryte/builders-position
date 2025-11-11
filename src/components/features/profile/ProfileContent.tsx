@@ -63,7 +63,6 @@ const ProfileContent: FC<ProfileContentProps> = ({
         ens={ens}
       />
       <ProfileStatsGrid
-        supporters={supporters}
         totalSupportVolume={totalSupportVolume}
         talentTokenPrice={talentTokenPrice}
       />
@@ -147,14 +146,7 @@ const ProfileStatsGrid: FC<ProfileStatsGridProps> = ({
 }) => {
   return (
     <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-      <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-4">
-        <dt className="text-xs font-medium uppercase tracking-wide text-blue-700">
-          Supporters
-        </dt>
-        <dd className="mt-2 text-xl font-semibold text-blue-900">
-          {formatNumber(supporters)}
-        </dd>
-      </div>
+      
       <div className="rounded-2xl border border-indigo-100 bg-indigo-50/60 p-4">
         <dt className="text-xs font-medium uppercase tracking-wide text-indigo-700">
           Token Price
