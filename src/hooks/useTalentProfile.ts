@@ -81,7 +81,7 @@ function extractAccount(payload: TalentProfileResponse): TalentAccount | null {
 
 const fetchTalentProfile = async (
   address: string,
-  token: string,
+  token: string
 ): Promise<TalentAccount | null> => {
   const url = new URL(getProfileUrl());
   url.searchParams.set("id", address.toLowerCase());
@@ -105,13 +105,10 @@ export const useTalentProfile = (address?: string) => {
   const token = import.meta.env.VITE_API_KEY;
   const sanitizedAddress = address?.toLowerCase();
 
-  const {
-    data,
-    error,
-    isPending,
-    isFetching,
-    refetch,
-  } = useQuery<TalentAccount | null, Error>({
+  const { data, error, isPending, isFetching, refetch } = useQuery<
+    TalentAccount | null,
+    Error
+  >({
     queryKey: ["talent-profile", sanitizedAddress],
     queryFn: () => {
       if (!sanitizedAddress || !token) {

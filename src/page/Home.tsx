@@ -31,12 +31,12 @@ function asNumber(value: unknown): number {
 export default function Home() {
   const { address, isConnected } = useAppKitAccount();
   const {
-    data: profile,
-    isLoading,
-    error,
+    profile,
+    profileError,
+    isLoadingProfile,
+    isFetchingProfile,
+    refetchProfile,
     tokenAvailable,
-    refetch,
-    isRefetching,
   } = useTalentProfile(address ?? undefined);
 
   const {
@@ -44,8 +44,6 @@ export default function Home() {
     isLoading: credentialsLoading,
     error: credentialsError,
   } = useGetCredentials(address ?? undefined);
-
-  console.log(profile, address);
 
   const displayName = useMemo(() => {
     return (
@@ -133,17 +131,17 @@ export default function Home() {
           <code>VITE_TALENT_API_TOKEN</code> to your environment configuration
           and restart the dev server.
         </div>
-      ) : isLoading || isRefetching ? (
+      ) : isLoadingProfile || isFetchingProfile ? (
         <div className="rounded-2xl border border-gray-200 bg-[var(--card-bg)] p-6 text-sm text-gray-600 shadow-sm">
           Loading profile…
         </div>
-      ) : error ? (
+      ) : profileError ? (
         <div className="space-y-3 rounded-2xl border border-red-200 bg-red-50/70 p-6 text-sm text-red-700">
-          <p>We couldn&apos;t load your profile: {error.message}</p>
+          <p>We couldn&apos;t load your profile: {profileError.message}</p>
           <button
             type="button"
             className="rounded-full border border-red-300 px-4 py-1 text-xs font-semibold text-red-700 transition hover:bg-red-100"
-            onClick={() => refetch()}
+            onClick={() => refetchProfile()}
           >
             Try again
           </button>
