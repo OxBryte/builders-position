@@ -37,17 +37,10 @@ const ProfileContent: FC<ProfileContentProps> = ({
 }) => {
   const displayName =
     profile.display_name ?? profile.username ?? "Connected Builder";
-
   const avatarUrl = profile.image_url ?? undefined;
   const bio = profile.bio ?? "";
   const location = profile.location ?? "";
-  const ens = profile.ens ?? "";
-  const supporters =
-    profile.talent?.supporters_count ??
-    profile.stats?.supporters ??
-    profile.supporters_count ??
-    profile.total_supporters ??
-    0;
+  const ens = profile.ens ?? "";  
 
   const totalSupportVolume = asNumber(
     profile.stats?.total_support_volume ?? profile.talent?.total_support_volume
@@ -144,13 +137,11 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
 };
 
 type ProfileStatsGridProps = {
-  supporters: number;
   totalSupportVolume: number;
   talentTokenPrice: number;
 };
 
 const ProfileStatsGrid: FC<ProfileStatsGridProps> = ({
-  supporters,
   totalSupportVolume,
   talentTokenPrice,
 }) => {
