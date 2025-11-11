@@ -49,7 +49,7 @@ export type TalentAccount = {
 };
 
 type TalentProfileResponse = {
-  profile?: TalentAccount;
+  data?: TalentAccount;
 } | null;
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -82,7 +82,7 @@ const fetchTalentProfile = async (
   }
 
   const payload = (await response.json()) as TalentProfileResponse;
-  return payload?.profile ?? null;
+  return payload?.data ?? null;
 };
 
 export const useTalentProfile = (address?: string) => {
