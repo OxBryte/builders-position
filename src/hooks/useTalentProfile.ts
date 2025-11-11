@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 export type TalentAccount = {
-  id: string | number;
+  id?: string | number;
   wallet_address?: string;
   username?: string;
   name?: string;
@@ -16,6 +16,19 @@ export type TalentAccount = {
   profile_picture_data?: Record<string, unknown>;
   supporters_count?: number;
   total_supporters?: number;
+  ens?: string;
+  farcaster_primary_wallet_address?: string;
+  human_checkmark?: boolean;
+  main_wallet_address?: string;
+  onchain_id?: number;
+  onchain_since?: string;
+  rank_position?: number;
+  tags?: string[];
+  stats?: {
+    supporters?: number;
+    total_support_volume?: number;
+    talent_token_price?: number;
+  };
   talent?: {
     supporters_count?: number;
     total_support_volume?: string | number;
@@ -23,24 +36,21 @@ export type TalentAccount = {
     price?: string | number;
     market_cap?: string | number;
   };
-  stats?: {
-    supporters?: number;
-    total_support_volume?: number;
-    talent_token_price?: number;
+  accounts?: Array<{
+    identifier: string;
+    source: string;
+    username: string | null;
+  }>;
+  user?: {
+    id?: string;
+    human_checkmark?: boolean;
+    main_wallet?: string;
   };
 };
 
-type TalentProfileResponse =
-  | { accounts?: TalentAccount[] }
-  | {
-      data?: {
-        accounts?: TalentAccount[];
-        account?: TalentAccount;
-      };
-      account?: TalentAccount;
-    }
-  | { account?: TalentAccount }
-  | null;
+type TalentProfileResponse = {
+  profile?: TalentAccount;
+} | null;
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const PROFILE_ENDPOINT = "/profile";
@@ -50,7 +60,7 @@ const getProfileUrl = () => {
     throw new Error("Missing VITE_BASE_URL environment variable.");
   }
 
-  return `${BASE_URL}${PROFILE_ENDPOINT}`;
+  return `${BASE_URL.replace(/\/$/, "")}${PROFILE_ENDPOINT}`;
 };
 
 const fetchTalentProfile = async (
@@ -72,7 +82,7 @@ const fetchTalentProfile = async (
   }
 
   const payload = (await response.json()) as TalentProfileResponse;
-  return extractAccount(payload);
+  return payload?.profile ?? null;
 };
 
 export const useTalentProfile = (address?: string) => {
