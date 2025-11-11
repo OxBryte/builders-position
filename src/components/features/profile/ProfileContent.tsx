@@ -37,9 +37,7 @@ const ProfileContent: FC<ProfileContentProps> = ({ profile, walletAddress }) => 
 
   const avatarUrl =
     profile.image_url ?? undefined;
-
-  const headline = profile.headline ?? profile.summary ?? "";
-  const bio = profile.bio ?? profile.about ?? "";
+  const bio = profile.bio ?? "";
   const location = profile.location ?? profile.country;
 
   const supporters =
