@@ -38,7 +38,7 @@ const ProfileContent: FC<ProfileContentProps> = ({ profile, walletAddress }) => 
   const avatarUrl =
     profile.image_url ?? undefined;
   const bio = profile.bio ?? "";
-  const location = profile.location ?? profile.country;
+  const location = profile.location ?? "";
 
   const supporters =
     profile.talent?.supporters_count ??
@@ -61,7 +61,6 @@ const ProfileContent: FC<ProfileContentProps> = ({ profile, walletAddress }) => 
     <div className="space-y-6 rounded-3xl border border-blue-100 bg-[var(--card-bg)] p-6 shadow-md backdrop-blur-sm">
       <ProfileHeader
         displayName={displayName}
-        headline={headline}
         location={location}
         bio={bio}
         avatarUrl={avatarUrl}
@@ -79,7 +78,6 @@ const ProfileContent: FC<ProfileContentProps> = ({ profile, walletAddress }) => 
 
 type ProfileHeaderProps = {
   displayName: string;
-  headline?: string;
   location?: string | null;
   bio?: string | null;
   avatarUrl?: string;
@@ -88,7 +86,6 @@ type ProfileHeaderProps = {
 
 const ProfileHeader: FC<ProfileHeaderProps> = ({
   displayName,
-  headline,
   location,
   bio,
   avatarUrl,
@@ -109,7 +106,7 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-2xl font-semibold text-gray-900">{displayName}</h1>
-            {headline ? <p className="text-sm text-gray-600">{headline}</p> : null}
+            {ens ? <p className="text-sm text-gray-600">{ens}</p> : null}
           </div>
           {walletLabel ? (
             <span className="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-medium text-gray-700">
