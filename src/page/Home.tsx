@@ -38,12 +38,7 @@ export default function Home() {
     refetchProfile,
     tokenAvailable,
   } = useTalentProfile(address ?? undefined);
-
-  const {
-    data: credentials,
-    isLoading: credentialsLoading,
-    error: credentialsError,
-  } = useGetCredentials(address ?? undefined);
+  console.log(profile);
 
   const displayName = useMemo(() => {
     return (
@@ -239,70 +234,7 @@ export default function Home() {
               </p>
             </div>
 
-            <section className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h2 className="text-sm font-semibold text-gray-800">
-                  Credentials
-                </h2>
-                {credentialsLoading ? (
-                  <span className="text-xs text-gray-500">Loading…</span>
-                ) : credentialsError ? (
-                  <span className="text-xs text-red-500">
-                    Failed to load credentials.
-                  </span>
-                ) : null}
-              </div>
-
-              {credentials && credentials.length > 0 ? (
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {credentials.map((credential) => (
-                    <article
-                      key={credential.id}
-                      className="rounded-xl border border-gray-200 bg-white/80 p-4 text-sm shadow-sm"
-                    >
-                      <h3 className="text-sm font-semibold text-gray-900">
-                        {credential.title ?? credential.name ?? "Credential"}
-                      </h3>
-                      {credential.issuer || credential.organization?.name ? (
-                        <p className="mt-1 text-xs text-gray-500">
-                          Issuer:{" "}
-                          {credential.issuer ??
-                            credential.organization?.name ??
-                            "—"}
-                        </p>
-                      ) : null}
-                      {credential.received_at || credential.issued_at ? (
-                        <p className="mt-1 text-xs text-gray-500">
-                          Received:{" "}
-                          {new Date(
-                            credential.received_at ?? credential.issued_at!
-                          ).toLocaleDateString()}
-                        </p>
-                      ) : null}
-                      {credential.description ? (
-                        <p className="mt-2 text-xs text-gray-600">
-                          {credential.description}
-                        </p>
-                      ) : null}
-                      {credential.url ? (
-                        <a
-                          href={credential.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="mt-3 inline-flex items-center text-xs font-medium text-blue-600 hover:underline"
-                        >
-                          View details →
-                        </a>
-                      ) : null}
-                    </article>
-                  ))}
-                </div>
-              ) : !credentialsLoading && !credentialsError ? (
-                <div className="rounded-xl border border-dashed border-gray-200 bg-white/60 p-4 text-center text-xs text-gray-500">
-                  No credentials found yet.
-                </div>
-              ) : null}
-            </section>
+           
           </div>
         </div>
       )}
