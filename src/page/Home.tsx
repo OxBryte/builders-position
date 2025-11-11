@@ -3,7 +3,6 @@ import { useAppKitAccount } from "@reown/appkit/react";
 
 import { truncateAddress, formatNumber } from "../components/lib/utils";
 import { useTalentProfile } from "../hooks/useTalentProfile";
-import { useGetCredentials } from "../hooks/useGetCredentials";
 
 function getInitials(value?: string | null) {
   if (!value) return "BP";
@@ -38,7 +37,6 @@ export default function Home() {
     refetch,
     isRefetching,
   } = useTalentProfile(address ?? undefined);
-
 
   const displayName = useMemo(() => {
     return (
