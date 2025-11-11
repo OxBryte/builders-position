@@ -32,6 +32,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
   const bio = profile.bio ?? "";
   const location = profile.location ?? "";
   const ens = profile.ens ?? "";
+  const username = profile.name ?? "";
 
   const walletLabel = walletAddress ? truncateAddress(walletAddress) : "";
 
@@ -44,6 +45,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
         avatarUrl={avatarUrl}
         walletLabel={walletLabel}
         ens={ens}
+        username={username}
       />
       <ProfileSummaryCard summary={profile.summary} />
     </div>
@@ -57,6 +59,7 @@ type ProfileHeaderProps = {
   avatarUrl?: string;
   walletLabel?: string;
   ens?: string;
+  username?: string;
 };
 
 const ProfileHeader: FC<ProfileHeaderProps> = ({
@@ -64,6 +67,7 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
   location,
   bio,
   avatarUrl,
+  username,
   walletLabel,
   ens,
 }) => {
