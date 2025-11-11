@@ -232,14 +232,18 @@ export default function Home() {
           <div className="space-y-4">
             <div className="rounded-2xl border border-gray-200 bg-white/70 p-4 text-sm text-gray-600 shadow-inner">
               <p>
-                <span className="font-medium text-gray-800">Latest summary: </span>
+                <span className="font-medium text-gray-800">
+                  Latest summary:{" "}
+                </span>
                 {profile?.summary ?? "No summary provided yet."}
               </p>
             </div>
 
             <section className="space-y-3">
               <div className="flex items-center justify-between">
-                <h2 className="text-sm font-semibold text-gray-800">Credentials</h2>
+                <h2 className="text-sm font-semibold text-gray-800">
+                  Credentials
+                </h2>
                 {credentialsLoading ? (
                   <span className="text-xs text-gray-500">Loading…</span>
                 ) : credentialsError ? (
@@ -262,14 +266,16 @@ export default function Home() {
                       {credential.issuer || credential.organization?.name ? (
                         <p className="mt-1 text-xs text-gray-500">
                           Issuer:{" "}
-                          {credential.issuer ?? credential.organization?.name ?? "—"}
+                          {credential.issuer ??
+                            credential.organization?.name ??
+                            "—"}
                         </p>
                       ) : null}
                       {credential.received_at || credential.issued_at ? (
                         <p className="mt-1 text-xs text-gray-500">
                           Received:{" "}
                           {new Date(
-                            credential.received_at ?? credential.issued_at!,
+                            credential.received_at ?? credential.issued_at!
                           ).toLocaleDateString()}
                         </p>
                       ) : null}
