@@ -109,7 +109,7 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
 }) => {
   return (
     <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
-      <div className="relative flex h-24 w-24 items-center justify-center rounded-lg border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-blue-100 shadow-inner">
+      <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-lg border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-blue-100 shadow-inner">
         {avatarUrl ? (
           <img
             src={avatarUrl}
@@ -121,8 +121,8 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
             {getInitials(displayName)}
           </span>
         )}
-        {isVerified ? (
-          <span className="absolute -bottom-1 -right-1 inline-flex h-6 w-6 !z-[100000] items-center justify-center rounded-full bg-blue-600 text-white shadow ring-2 ring-white">
+        {/* {isVerified ? (
+          <span className="absolute -bottom-1 -right-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white shadow ring-2 ring-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -136,7 +136,7 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
               />
             </svg>
           </span>
-        ) : null}
+        ) : null} */}
       </div>
 
       <div className="flex-1 space-y-4">
