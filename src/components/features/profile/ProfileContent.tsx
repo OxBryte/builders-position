@@ -109,7 +109,7 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
 }) => {
   return (
     <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
-      <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-blue-100 shadow-inner">
+      <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-lg border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-blue-100 shadow-inner">
         {avatarUrl ? (
           <img
             src={avatarUrl}
