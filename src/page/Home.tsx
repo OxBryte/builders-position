@@ -19,6 +19,7 @@ export default function Home() {
     refetchProfile,
     tokenAvailable,
   } = useTalentProfile(address ?? undefined);
+  console.log(profile, 'gg');
 
   if (!isConnected) {
     return (
