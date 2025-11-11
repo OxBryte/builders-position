@@ -53,31 +53,6 @@ const getProfileUrl = () => {
   return `${BASE_URL}${PROFILE_ENDPOINT}`;
 };
 
-function extractAccount(payload: TalentProfileResponse): TalentAccount | null {
-  if (!payload || typeof payload !== "object") {
-    return null;
-  }
-
-  if ("accounts" in payload && Array.isArray(payload.accounts)) {
-    return payload.accounts[0] ?? null;
-  }
-
-  if ("data" in payload && payload.data && typeof payload.data === "object") {
-    const { accounts, account } = payload.data;
-    if (Array.isArray(accounts) && accounts.length > 0) {
-      return accounts[0] ?? null;
-    }
-    if (account) {
-      return account;
-    }
-  }
-
-  if ("account" in payload && payload.account) {
-    return payload.account;
-  }
-
-  return null;
-}
 
 const fetchTalentProfile = async (
   address: string,
