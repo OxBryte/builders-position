@@ -15,7 +15,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3 text-sm font-medium text-gray-500">
           <NavLink
-            to="/profile"
+            to="/"
             className={({ isActive }) =>
               [
                 "transition-colors",
