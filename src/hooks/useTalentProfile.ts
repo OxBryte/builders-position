@@ -53,14 +53,13 @@ type TalentProfileResponse = {
 } | null;
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-const PROFILE_ENDPOINT = "/profile";
 
 const getProfileUrl = () => {
   if (!BASE_URL) {
     throw new Error("Missing VITE_BASE_URL environment variable.");
   }
 
-  return `${BASE_URL}${PROFILE_ENDPOINT}`;
+  return `${BASE_URL}/profile`;
 };
 
 const fetchTalentProfile = async (
