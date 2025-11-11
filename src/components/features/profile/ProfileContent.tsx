@@ -27,40 +27,55 @@ type ProfileContentProps = {
   walletAddress?: string;
 };
 
-const ProfileContent: FC<ProfileContentProps> = ({ profile, walletAddress }) => {
+const ProfileContent: FC<ProfileContentProps> = ({
+  profile,
+  walletAddress,
+}) => {
   const displayName =
-    profile.display_name ?? profile.name ?? profile.username ?? "Connected Builder";
+    profile.display_name ??
+    profile.name ??
+    profile.username ??
+    "Connected Builder";
 
-  const avatarUrl =
-    profile.image_url ??
-    (profile.profile_picture_url
-      ? profile.profile_picture_url
-      : undefined);
+  const avatarUrl = profile.image_url ?? undefined;
 
   const bio = profile.bio ?? profile.about ?? "";
   const location = profile.location ?? profile.country ?? "";
   const ens = profile.ens ?? "";
   const username = profile.name ?? "";
-  const isVerified = Boolean(profile.human_checkmark || profile.user?.human_checkmark);
+  const isVerified = Boolean(
+    profile.human_checkmark || profile.user?.human_checkmark
+  );
 
   const primaryWalletAddress =
-    profile.main_wallet_address ?? profile.user?.main_wallet ?? walletAddress ?? "";
+    profile.main_wallet_address ??
+    profile.user?.main_wallet ??
+    walletAddress ??
+    "";
 
   const accounts = profile.accounts ?? [];
-  const farcasterHandle = accounts.find((account) => account.source === "farcaster")?.username ?? "";
-  const githubHandle = accounts.find((account) => account.source === "github")?.username ?? "";
-  const linkedinHandle = accounts.find((account) => account.source === "linkedin")?.username ?? "";
+  const farcasterHandle =
+    accounts.find((account) => account.source === "farcaster")?.username ?? "";
+  const githubHandle =
+    accounts.find((account) => account.source === "github")?.username ?? "";
+  const linkedinHandle =
+    accounts.find((account) => account.source === "linkedin")?.username ?? "";
 
   const identityChips: IdentityChip[] = [];
 
   if (location) identityChips.push({ icon: "📍", label: location });
   if (ens) identityChips.push({ icon: "🪪", label: ens });
   if (username) identityChips.push({ icon: "👤", label: `@${username}` });
-  if (farcasterHandle) identityChips.push({ icon: "✦", label: `fc/${farcasterHandle}` });
-  if (githubHandle) identityChips.push({ icon: "⌘", label: `gh/${githubHandle}` });
+  if (farcasterHandle)
+    identityChips.push({ icon: "✦", label: `fc/${farcasterHandle}` });
+  if (githubHandle)
+    identityChips.push({ icon: "⌘", label: `gh/${githubHandle}` });
   if (linkedinHandle) identityChips.push({ icon: "in", label: linkedinHandle });
   if (primaryWalletAddress) {
-    identityChips.push({ icon: "🔐", label: truncateAddress(primaryWalletAddress) });
+    identityChips.push({
+      icon: "🔐",
+      label: truncateAddress(primaryWalletAddress),
+    });
   }
 
   return (
@@ -96,7 +111,11 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
     <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
       <div className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-3xl border border-blue-100 bg-gradient-to-br from-blue-50 via-white to-blue-100 shadow-inner">
         {avatarUrl ? (
-          <img src={avatarUrl} alt={displayName} className="h-full w-full object-cover" />
+          <img
+            src={avatarUrl}
+            alt={displayName}
+            className="h-full w-full object-cover"
+          />
         ) : (
           <span className="text-2xl font-semibold text-blue-600">
             {getInitials(displayName)}
@@ -123,7 +142,9 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
       <div className="flex-1 space-y-4">
         <div className="space-y-2">
           <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3">
-            <h1 className="text-2xl font-semibold text-gray-900">{displayName}</h1>
+            <h1 className="text-2xl font-semibold text-gray-900">
+              {displayName}
+            </h1>
             {isVerified ? (
               <span className="inline-flex items-center gap-1 rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
                 <span className="h-1.5 w-1.5 rounded-full bg-blue-500"></span>
@@ -132,11 +153,13 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
             ) : null}
           </div>
           {bio ? (
-            <p className="max-w-2xl text-sm leading-relaxed text-gray-700">{bio}</p>
+            <p className="max-w-2xl text-sm leading-relaxed text-gray-700">
+              {bio}
+            </p>
           ) : (
             <p className="text-sm text-gray-500">
-              No bio provided yet. Update your Talent Protocol profile to add more
-              details.
+              No bio provided yet. Update your Talent Protocol profile to add
+              more details.
             </p>
           )}
         </div>
