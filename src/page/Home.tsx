@@ -45,6 +45,8 @@ export default function Home() {
     error: credentialsError,
   } = useGetCredentials(address ?? undefined);
 
+  console.log(credentials);
+
   const displayName = useMemo(() => {
     return (
       profile?.display_name ??
