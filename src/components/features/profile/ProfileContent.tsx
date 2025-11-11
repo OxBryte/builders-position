@@ -42,14 +42,6 @@ const ProfileContent: FC<ProfileContentProps> = ({
   const location = profile.location ?? "";
   const ens = profile.ens ?? "";  
 
-  const totalSupportVolume = asNumber(
-    profile.stats?.total_support_volume ?? profile.talent?.total_support_volume
-  );
-
-  const talentTokenPrice = asNumber(
-    profile.stats?.talent_token_price ?? profile.talent?.price
-  );
-
   const walletLabel = walletAddress ? truncateAddress(walletAddress) : "";
 
   return (
@@ -63,8 +55,6 @@ const ProfileContent: FC<ProfileContentProps> = ({
         ens={ens}
       />
       <ProfileStatsGrid
-        totalSupportVolume={totalSupportVolume}
-        talentTokenPrice={talentTokenPrice}
       />
       <ProfileSummaryCard summary={profile.summary} />
     </div>
@@ -136,13 +126,9 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
 };
 
 type ProfileStatsGridProps = {
-  totalSupportVolume: number;
-  talentTokenPrice: number;
 };
 
 const ProfileStatsGrid: FC<ProfileStatsGridProps> = ({
-  totalSupportVolume,
-  talentTokenPrice,
 }) => {
   return (
     <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
@@ -151,17 +137,11 @@ const ProfileStatsGrid: FC<ProfileStatsGridProps> = ({
         <dt className="text-xs font-medium uppercase tracking-wide text-indigo-700">
           Token Price
         </dt>
-        <dd className="mt-2 text-xl font-semibold text-indigo-900">
-          {talentTokenPrice > 0 ? `$${formatNumber(talentTokenPrice)}` : "—"}
-        </dd>
       </div>
       <div className="rounded-2xl border border-teal-100 bg-teal-50/60 p-4">
         <dt className="text-xs font-medium uppercase tracking-wide text-teal-700">
           Support Volume
         </dt>
-        <dd className="mt-2 text-xl font-semibold text-teal-900">
-          {totalSupportVolume > 0 ? formatNumber(totalSupportVolume) : "—"}
-        </dd>
       </div>
     </dl>
   );
