@@ -1,7 +1,10 @@
 import { useAppKit, useAppKitAccount } from "@reown/appkit/react";
 
 import { truncateAddress, formatNumber } from "../components/lib/utils";
-import { useTalentProfile, type TalentAccount } from "../hooks/useTalentProfile";
+import {
+  useTalentProfile,
+  type TalentAccount,
+} from "../hooks/useTalentProfile";
 
 const getInitials = (value?: string | null) => {
   if (!value) return "BP";
@@ -114,8 +117,8 @@ function ConnectWalletPrompt({ onConnect }: ConnectWalletPromptProps) {
             Connect your wallet
           </h2>
           <p className="text-sm text-blue-700/80">
-            Link your wallet to view personalized Talent Protocol insights and track
-            your builder stats.
+            Link your wallet to view personalized Talent Protocol insights and
+            track your builder stats.
           </p>
         </div>
         <button
@@ -133,9 +136,8 @@ function ConnectWalletPrompt({ onConnect }: ConnectWalletPromptProps) {
 function MissingTokenAlert() {
   return (
     <div className="rounded-2xl border border-yellow-300 bg-yellow-50/70 p-6 text-center text-sm text-yellow-800">
-      Talent Protocol API token missing. Add{" "}
-      <code>VITE_TALENT_API_TOKEN</code> to your environment configuration and restart
-      the dev server.
+      Talent Protocol API token missing. Add <code>VITE_TALENT_API_TOKEN</code>{" "}
+      to your environment configuration and restart the dev server.
     </div>
   );
 }
@@ -183,7 +185,10 @@ type ProfileContentProps = {
 
 function ProfileContent({ profile, walletAddress }: ProfileContentProps) {
   const displayName =
-    profile.display_name ?? profile.name ?? profile.username ?? "Connected Builder";
+    profile.display_name ??
+    profile.name ??
+    profile.username ??
+    "Connected Builder";
 
   const avatarUrl =
     profile.profile_picture_url ??
@@ -205,11 +210,11 @@ function ProfileContent({ profile, walletAddress }: ProfileContentProps) {
     0;
 
   const totalSupportVolume = asNumber(
-    profile.stats?.total_support_volume ?? profile.talent?.total_support_volume,
+    profile.stats?.total_support_volume ?? profile.talent?.total_support_volume
   );
 
   const talentTokenPrice = asNumber(
-    profile.stats?.talent_token_price ?? profile.talent?.price,
+    profile.stats?.talent_token_price ?? profile.talent?.price
   );
 
   const walletLabel = walletAddress ? truncateAddress(walletAddress) : "";
@@ -251,4 +256,107 @@ function ProfileHeader({
   avatarUrl,
   walletLabel,
 }: ProfileHeaderProps) {
-  return
+  return (
+    <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
+      <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border border-blue-100 bg-blue-50">
+        {avatarUrl ? (
+          <img
+            src={avatarUrl}
+            alt={displayName}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <span className="text-2xl font-semibold text-blue-600">
+            {getInitials(displayName)}
+          </span>
+        )}
+      </div>
+      <div className="flex-1 space-y-2">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold text-gray-900">
+              {displayName}
+            </h1>
+            {headline ? (
+              <p className="text-sm text-gray-600">{headline}</p>
+            ) : null}
+          </div>
+          {walletLabel ? (
+            <span className="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-medium text-gray-700">
+              {walletLabel}
+            </span>
+          ) : null}
+        </div>
+        {location ? (
+          <p className="text-sm text-gray-500">
+            Location: <span className="font-medium">{location}</span>
+          </p>
+        ) : null}
+        {bio ? (
+          <p className="text-sm leading-relaxed text-gray-700">{bio}</p>
+        ) : (
+          <p className="text-sm text-gray-500">
+            No bio provided yet. Update your Talent Protocol profile to add more
+            details.
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+type ProfileStatsGridProps = {
+  supporters: number;
+  totalSupportVolume: number;
+  talentTokenPrice: number;
+};
+
+function ProfileStatsGrid({
+  supporters,
+  totalSupportVolume,
+  talentTokenPrice,
+}: ProfileStatsGridProps) {
+  return (
+    <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="rounded-2xl border border-blue-100 bg-blue-50/60 p-4">
+        <dt className="text-xs font-medium uppercase tracking-wide text-blue-700">
+          Supporters
+        </dt>
+        <dd className="mt-2 text-xl font-semibold text-blue-900">
+          {formatNumber(supporters)}
+        </dd>
+      </div>
+      <div className="rounded-2xl border border-indigo-100 bg-indigo-50/60 p-4">
+        <dt className="text-xs font-medium uppercase tracking-wide text-indigo-700">
+          Token Price
+        </dt>
+        <dd className="mt-2 text-xl font-semibold text-indigo-900">
+          {talentTokenPrice > 0 ? `$${formatNumber(talentTokenPrice)}` : "—"}
+        </dd>
+      </div>
+      <div className="rounded-2xl border border-teal-100 bg-teal-50/60 p-4">
+        <dt className="text-xs font-medium uppercase tracking-wide text-teal-700">
+          Support Volume
+        </dt>
+        <dd className="mt-2 text-xl font-semibold text-teal-900">
+          {totalSupportVolume > 0 ? formatNumber(totalSupportVolume) : "—"}
+        </dd>
+      </div>
+    </dl>
+  );
+}
+
+type ProfileSummaryCardProps = {
+  summary?: string | null;
+};
+
+function ProfileSummaryCard({ summary }: ProfileSummaryCardProps) {
+  return (
+    <div className="rounded-2xl border border-gray-200 bg-white/70 p-4 text-sm text-gray-600 shadow-inner">
+      <p>
+        <span className="font-medium text-gray-800">Latest summary: </span>
+        {summary ?? "No summary provided yet."}
+      </p>
+    </div>
+  );
+}
