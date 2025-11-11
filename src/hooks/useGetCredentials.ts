@@ -66,7 +66,7 @@ async function fetchCredentials(address: string, token: string) {
     throw new Error("Missing VITE_BASE_URL environment variable.");
   }
 
-  const url = new URL(`${BASE_URL/accounts`);
+  const url = new URL(`${BASE_URL}/credentials`);
   url.searchParams.set("id", address.toLowerCase());
 
   const response = await fetch(url.toString(), {
