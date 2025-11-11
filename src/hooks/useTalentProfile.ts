@@ -45,12 +45,13 @@ type TalentProfileResponse =
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const PROFILE_ENDPOINT = "/profile";
 
-function getProfileUrl() {
+const getProfileUrl = () => {
   if (!BASE_URL) {
     throw new Error("Missing VITE_BASE_URL environment variable.");
   }
+
   return `${BASE_URL.replace(/\/$/, "")}${PROFILE_ENDPOINT}`;
-}
+};
 
 function extractAccount(payload: TalentProfileResponse): TalentAccount | null {
   if (!payload || typeof payload !== "object") {
@@ -78,7 +79,10 @@ function extractAccount(payload: TalentProfileResponse): TalentAccount | null {
   return null;
 }
 
-async function fetchTalentProfile(address: string, token: string) {
+const fetchTalentProfile = async (
+  address: string,
+  token: string,
+): Promise<TalentAccount | null> => {
   const url = new URL(getProfileUrl());
   url.searchParams.set("id", address.toLowerCase());
 
@@ -95,29 +99,38 @@ async function fetchTalentProfile(address: string, token: string) {
 
   const payload = (await response.json()) as TalentProfileResponse;
   return extractAccount(payload);
-}
+};
 
-export function useTalentProfile(address?: string) {
+export const useTalentProfile = (address?: string) => {
   const token = import.meta.env.VITE_API_KEY;
   const sanitizedAddress = address?.toLowerCase();
-  const enabled = Boolean(sanitizedAddress && token);
 
-  const query = useQuery<TalentAccount | null, Error>({
+  const {
+    data,
+    error,
+    isPending,
+    isFetching,
+    refetch,
+  } = useQuery<TalentAccount | null, Error>({
     queryKey: ["talent-profile", sanitizedAddress],
-    queryFn: async () => {
+    queryFn: () => {
       if (!sanitizedAddress || !token) {
         throw new Error("Missing wallet address or Talent Protocol token.");
       }
 
       return fetchTalentProfile(sanitizedAddress, token);
     },
-    enabled,
+    enabled: Boolean(sanitizedAddress && token),
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
 
   return {
-    ...query,
+    profile: data ?? null,
+    profileError: error,
+    isLoadingProfile: isPending,
+    isFetchingProfile: isFetching,
+    refetchProfile: refetch,
     tokenAvailable: Boolean(token),
   };
-}
+};
