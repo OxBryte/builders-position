@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
 import Layout from "./components/layout/Layout";
 import Home from "./page/Home.tsx";
-import LeaderboardPage from "./page/Leaderboard";
+import LeaderboardPage from "./page/leaderboard";
 
 function App() {
   return (
