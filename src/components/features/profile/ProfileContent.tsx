@@ -92,6 +92,7 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
             <h1 className="text-2xl font-semibold text-gray-900">
               {displayName}
             </h1>
+            {username ? <p className="text-sm text-gray-600">{username}</p> : null}
             {ens ? <p className="text-sm text-gray-600">{ens}</p> : null}
           </div>
           {walletLabel ? (
