@@ -39,13 +39,7 @@ export default function Home() {
     isRefetching,
   } = useTalentProfile(address ?? undefined);
 
-  const {
-    data: credentials,
-    isLoading: credentialsLoading,
-    error: credentialsError,
-    isRefetching: credentialsRefetching,
-  } = useGetCredentials(address ?? undefined);
-  console.log(credentials);
+  const { data: credentials } = useGetCredentials(address ?? undefined);
 
   const displayName = useMemo(() => {
     return (
@@ -114,8 +108,8 @@ export default function Home() {
                 Connect your wallet
               </h2>
               <p className="text-sm text-blue-700/80">
-                Link your wallet to view personalized Talent Protocol insights and track
-                your builder stats.
+                Link your wallet to view personalized Talent Protocol insights
+                and track your builder stats.
               </p>
             </div>
             <button
