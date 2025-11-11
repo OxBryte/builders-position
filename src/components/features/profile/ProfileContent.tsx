@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import { formatNumber, truncateAddress } from "../../lib/utils";
+import { truncateAddress } from "../../lib/utils";
 import type { TalentAccount } from "../../../hooks/useTalentProfile";
 
 const getInitials = (value?: string | null) => {
@@ -17,15 +17,6 @@ const getInitials = (value?: string | null) => {
   return parts.slice(0, 2).join("");
 };
 
-const asNumber = (value: unknown): number => {
-  if (typeof value === "number") return value;
-  if (typeof value === "string") {
-    const parsed = Number(value);
-    return Number.isNaN(parsed) ? 0 : parsed;
-  }
-  return 0;
-};
-
 type ProfileContentProps = {
   profile: TalentAccount;
   walletAddress?: string;
@@ -40,7 +31,7 @@ const ProfileContent: FC<ProfileContentProps> = ({
   const avatarUrl = profile.image_url ?? undefined;
   const bio = profile.bio ?? "";
   const location = profile.location ?? "";
-  const ens = profile.ens ?? "";  
+  const ens = profile.ens ?? "";
 
   const walletLabel = walletAddress ? truncateAddress(walletAddress) : "";
 
@@ -53,8 +44,6 @@ const ProfileContent: FC<ProfileContentProps> = ({
         avatarUrl={avatarUrl}
         walletLabel={walletLabel}
         ens={ens}
-      />
-      <ProfileStatsGrid
       />
       <ProfileSummaryCard summary={profile.summary} />
     </div>
@@ -122,28 +111,6 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
         )}
       </div>
     </div>
-  );
-};
-
-type ProfileStatsGridProps = {
-};
-
-const ProfileStatsGrid: FC<ProfileStatsGridProps> = ({
-}) => {
-  return (
-    <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-      
-      <div className="rounded-2xl border border-indigo-100 bg-indigo-50/60 p-4">
-        <dt className="text-xs font-medium uppercase tracking-wide text-indigo-700">
-          Token Price
-        </dt>
-      </div>
-      <div className="rounded-2xl border border-teal-100 bg-teal-50/60 p-4">
-        <dt className="text-xs font-medium uppercase tracking-wide text-teal-700">
-          Support Volume
-        </dt>
-      </div>
-    </dl>
   );
 };
 
