@@ -27,6 +27,11 @@ type CredentialsResponse =
       data?: {
         credentials?: TalentCredential[];
       };
+    }
+  | {
+      accounts?: Array<{
+        credentials?: TalentCredential[];
+      }>;
     };
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -61,9 +66,8 @@ async function fetchCredentials(address: string, token: string) {
     throw new Error("Missing VITE_BASE_URL environment variable.");
   }
 
-  const url = new URL(
-    `${BASE_URL.replace(/\/$/, "")}/accounts/${address}/credentials`
-  );
+  const url = new URL(`${BASE_URL.replace(/\/$/, "")}/accounts`);
+  url.searchParams.set("id", address.toLowerCase());
 
   const response = await fetch(url.toString(), {
     headers: {
@@ -79,6 +83,17 @@ async function fetchCredentials(address: string, token: string) {
   }
 
   const payload = (await response.json()) as CredentialsResponse;
+
+  if ("accounts" in payload && Array.isArray(payload.accounts)) {
+    const accountWithCredentials = payload.accounts.find(
+      (account) =>
+        Array.isArray(account.credentials) && account.credentials.length > 0
+    );
+    if (accountWithCredentials?.credentials) {
+      return accountWithCredentials.credentials;
+    }
+  }
+
   return normalizeCredentials(payload);
 }
 
