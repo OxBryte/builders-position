@@ -18,7 +18,6 @@ export type TalentAccount = {
   total_supporters?: number;
   talent?: {
     supporters_count?: number;
-    total_supporters?: number;
     total_support_volume?: string | number;
     total_supply?: string | number;
     price?: string | number;
@@ -31,10 +30,8 @@ export type TalentAccount = {
   };
 };
 
-type TalentAccountsResponse =
-  | {
-      accounts?: TalentAccount[];
-    }
+type TalentProfileResponse =
+  | { accounts?: TalentAccount[] }
   | {
       data?: {
         accounts?: TalentAccount[];
@@ -42,35 +39,35 @@ type TalentAccountsResponse =
       };
       account?: TalentAccount;
     }
-  | {
-      account?: TalentAccount;
-    };
+  | { account?: TalentAccount }
+  | null;
 
-const TALENT_API_URL = `${import.meta.env.VITE_BASE_URL}/profile`;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+const PROFILE_ENDPOINT = "/profile";
 
-function extractAccount(
-  payload: TalentAccountsResponse | null
-): TalentAccount | null {
+function getProfileUrl() {
+  if (!BASE_URL) {
+    throw new Error("Missing VITE_BASE_URL environment variable.");
+  }
+  return `${BASE_URL.replace(/\/$/, "")}${PROFILE_ENDPOINT}`;
+}
+
+function extractAccount(payload: TalentProfileResponse): TalentAccount | null {
   if (!payload || typeof payload !== "object") {
     return null;
   }
 
-  if (Array.isArray((payload as { accounts?: TalentAccount[] }).accounts)) {
-    const [first] = (payload as { accounts: TalentAccount[] }).accounts;
-    return first ?? null;
+  if ("accounts" in payload && Array.isArray(payload.accounts)) {
+    return payload.accounts[0] ?? null;
   }
 
   if ("data" in payload && payload.data && typeof payload.data === "object") {
-    const data = payload.data as {
-      accounts?: TalentAccount[];
-      account?: TalentAccount;
-    };
-    if (Array.isArray(data.accounts)) {
-      const [first] = data.accounts;
-      if (first) return first;
+    const { accounts, account } = payload.data;
+    if (Array.isArray(accounts) && accounts.length > 0) {
+      return accounts[0] ?? null;
     }
-    if (data.account) {
-      return data.account;
+    if (account) {
+      return account;
     }
   }
 
@@ -82,7 +79,7 @@ function extractAccount(
 }
 
 async function fetchTalentProfile(address: string, token: string) {
-  const url = new URL(TALENT_API_URL);
+  const url = new URL(getProfileUrl());
   url.searchParams.set("id", address.toLowerCase());
 
   const response = await fetch(url.toString(), {
@@ -96,7 +93,7 @@ async function fetchTalentProfile(address: string, token: string) {
     throw new Error(`Talent Protocol request failed (${response.status})`);
   }
 
-  const payload = (await response.json()) as TalentAccountsResponse;
+  const payload = (await response.json()) as TalentProfileResponse;
   return extractAccount(payload);
 }
 
@@ -111,6 +108,7 @@ export function useTalentProfile(address?: string) {
       if (!sanitizedAddress || !token) {
         throw new Error("Missing wallet address or Talent Protocol token.");
       }
+
       return fetchTalentProfile(sanitizedAddress, token);
     },
     enabled,
