@@ -31,15 +31,17 @@ type ProfileContentProps = {
   walletAddress?: string;
 };
 
-const ProfileContent: FC<ProfileContentProps> = ({ profile, walletAddress }) => {
+const ProfileContent: FC<ProfileContentProps> = ({
+  profile,
+  walletAddress,
+}) => {
   const displayName =
-    profile.display_name ?? profile.name ?? profile.username ?? "Connected Builder";
+    profile.display_name ?? profile.username ?? "Connected Builder";
 
-  const avatarUrl =
-    profile.image_url ?? undefined;
+  const avatarUrl = profile.image_url ?? undefined;
   const bio = profile.bio ?? "";
   const location = profile.location ?? "";
-
+  const ens = profile.ens ?? "";
   const supporters =
     profile.talent?.supporters_count ??
     profile.stats?.supporters ??
@@ -48,11 +50,11 @@ const ProfileContent: FC<ProfileContentProps> = ({ profile, walletAddress }) => 
     0;
 
   const totalSupportVolume = asNumber(
-    profile.stats?.total_support_volume ?? profile.talent?.total_support_volume,
+    profile.stats?.total_support_volume ?? profile.talent?.total_support_volume
   );
 
   const talentTokenPrice = asNumber(
-    profile.stats?.talent_token_price ?? profile.talent?.price,
+    profile.stats?.talent_token_price ?? profile.talent?.price
   );
 
   const walletLabel = walletAddress ? truncateAddress(walletAddress) : "";
@@ -65,6 +67,7 @@ const ProfileContent: FC<ProfileContentProps> = ({ profile, walletAddress }) => 
         bio={bio}
         avatarUrl={avatarUrl}
         walletLabel={walletLabel}
+        ens={ens}
       />
       <ProfileStatsGrid
         supporters={supporters}
@@ -82,6 +85,7 @@ type ProfileHeaderProps = {
   bio?: string | null;
   avatarUrl?: string;
   walletLabel?: string;
+  ens?: string;
 };
 
 const ProfileHeader: FC<ProfileHeaderProps> = ({
@@ -90,12 +94,17 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
   bio,
   avatarUrl,
   walletLabel,
+  ens,
 }) => {
   return (
     <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
       <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border border-blue-100 bg-blue-50">
         {avatarUrl ? (
-          <img src={avatarUrl} alt={displayName} className="h-full w-full object-cover" />
+          <img
+            src={avatarUrl}
+            alt={displayName}
+            className="h-full w-full object-cover"
+          />
         ) : (
           <span className="text-2xl font-semibold text-blue-600">
             {getInitials(displayName)}
@@ -105,7 +114,9 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
       <div className="flex-1 space-y-2">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">{displayName}</h1>
+            <h1 className="text-2xl font-semibold text-gray-900">
+              {displayName}
+            </h1>
             {ens ? <p className="text-sm text-gray-600">{ens}</p> : null}
           </div>
           {walletLabel ? (
@@ -123,7 +134,8 @@ const ProfileHeader: FC<ProfileHeaderProps> = ({
           <p className="text-sm leading-relaxed text-gray-700">{bio}</p>
         ) : (
           <p className="text-sm text-gray-500">
-            No bio provided yet. Update your Talent Protocol profile to add more details.
+            No bio provided yet. Update your Talent Protocol profile to add more
+            details.
           </p>
         )}
       </div>
