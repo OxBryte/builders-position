@@ -36,7 +36,7 @@ const ProfileContent: FC<ProfileContentProps> = ({ profile, walletAddress }) => 
     profile.display_name ?? profile.name ?? profile.username ?? "Connected Builder";
 
   const avatarUrl =
-    profile.image_url;
+    profile.image_url ?? undefined;
 
   const headline = profile.headline ?? profile.summary ?? "";
   const bio = profile.bio ?? profile.about ?? "";

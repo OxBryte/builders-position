@@ -12,8 +12,7 @@ export type TalentAccount = {
   about?: string;
   location?: string;
   country?: string;
-  profile_picture_url?: string;
-  profile_picture_data?: Record<string, unknown>;
+  image_url?: string;
   supporters_count?: number;
   total_supporters?: number;
   ens?: string;
