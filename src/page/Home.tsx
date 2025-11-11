@@ -37,7 +37,7 @@ export default function Home() {
     refetchProfile,
     tokenAvailable,
   } = useTalentProfile(address ?? undefined);
-  console.log(profile);
+  console.log(profile, 'gg');
 
   const displayName = useMemo(() => {
     return (

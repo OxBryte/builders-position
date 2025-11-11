@@ -60,7 +60,7 @@ const getProfileUrl = () => {
     throw new Error("Missing VITE_BASE_URL environment variable.");
   }
 
-  return `${BASE_URL.replace(/\/$/, "")}${PROFILE_ENDPOINT}`;
+  return `${BASE_URL}${PROFILE_ENDPOINT}`;
 };
 
 const fetchTalentProfile = async (
